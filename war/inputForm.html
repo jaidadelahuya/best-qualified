@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Input</title>
+</head>
+<body>
+
+	<h2>Input Form</h2>
+	<form method="post" action="/bq/save-question">
+		<table>
+		<tr>
+		<td>Category</td>
+		
+		<td><select name="category">
+		  			<option value="beginner">Beginner</option>
+		  			<option value="mid-level">Mid-Level</option>
+		 			<option value="senior">Senior</option>
+		  			
+			</select>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>Question Body</td>
+		<td><input type="text" name="question-body"></td>
+		</tr>
+		
+		<tr>
+			<td>Alternatives</td>
+			
+			<td><input type="text" name="alt-A-body" value="A"></td>
+		</tr>
+		
+		<tr>
+			<td></td><td><input type="text" name="alt-B-body" value="B"></td>
+		</tr>
+		
+		<tr>
+			<td></td><td><input type="text" name="alt-C-body" value="C"></td>
+		</tr>
+		<tr>
+			<td></td><td><input type="text" name="alt-D-body" value="D"></td>
+		</tr>
+		<tr>
+			<td></td><td><input type="text" name="alt-E-body" value="E"></td>
+		</tr>
+		
+		
+		
+		<tr>
+		<td>Correct Answer</td>
+		<td><input name="correctAnswer" />
+		</td>
+		</tr>
+		
+		
+		<tr>
+		<td>Explanation</td>
+		<td><input type="text" name="explanation"></td>
+		</tr>
+		
+		<tr>
+   				<td><input type="submit" value="Submit" /></td>
+   				<td></td>
+   			</tr>
+		</table>
+	
+	</form>
+	
+</body>
+</html>

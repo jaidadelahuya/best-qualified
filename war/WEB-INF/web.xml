@@ -475,6 +475,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<servlet>
+	    <servlet-name>InputServlet</servlet-name>
+	    <servlet-class>com.bestqualified.admin.InputServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>InputServlet</servlet-name>
+	    <url-pattern>/bq/save-question</url-pattern>
+	</servlet-mapping>
+	
+	
 	
 	<context-param>
 		<param-name>LinkedInClientId</param-name>
@@ -495,5 +506,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<param-name>FacebookClientSecret</param-name>
 		<param-value>b43a32be081ca0863328638d2270cda3</param-value>
 	</context-param>
+	
+	
+	
+	
 	
 </web-app>
