@@ -33,6 +33,14 @@
 .dropdown-menu a:hover {
 	background-color: #4e69a2 !important
 }
+.icons i {
+	margin-right: 2%;
+}
+
+.icons {
+	text-align: right;
+}
+
 
 .navbar-nav a {
 	

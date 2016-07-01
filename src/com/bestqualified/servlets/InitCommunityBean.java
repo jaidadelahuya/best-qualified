@@ -75,10 +75,7 @@ public class InitCommunityBean extends HttpServlet {
 		}
 
 		resp.sendRedirect(resp.encodeRedirectURL("/bq/community"));
-<<<<<<< HEAD
 
-=======
->>>>>>> 16fe53527c317bbcaf2cc1c72cd579956f6486f6
 	}
 
 }

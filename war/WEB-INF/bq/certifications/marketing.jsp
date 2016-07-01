@@ -95,103 +95,7 @@
 	<div class="container" style="margin-top: 2%; margin-bottom: 2%;">
 		<div class="row">
 			<div class="col-sm-8">
-				<div class="row" style="margin-bottom: 1%;">
-					<div class="col-sm-12 cert-view no-padding-div">
-						<div class="col-sm-12 cert-view-header no-padding-div">
-							<h3>NIMN</h3>
-						</div>
-						<div class="col-sm-12 no-padding-div cert-view-content">
-							<p style="margin-bottom: 0px">The National Institute of Marketing of Nigeria (NIMN) is the body for professionals engaged in marketing and related fields. Membership is compulsory for all marketing practitioners in Nigeria.
-							 The NIMN provides trainings, examinations and consultancy activities as a means of ensuring that its members adopt professional approach to marketing</p>
-						</div>
-						<div class="col-sm-12 no-padding-div cert-view-content">
-							<h4>Foundation Certificate in Marketing</h4>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Learning Outcome</strong>
 
-									</h5>
-									<ul>
-										<li>Cultivate sales habits of top Fortune 500 executives</li>
-										<li>Learn the power of creating and utilizing "personal
-											identity" to amplify your multitude of strengths</li>
-										<li>Develop lasting behaviors that will make you a stand
-											out professional</li>
-									</ul>
-								</div>
-
-							</div>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Audience</strong>
-									</h5>
-									<ul>
-										<li>SalesManagers and Executives</li>
-									</ul>
-								</div>
-							</div>
-							<h4>Chartered Graduate Diploma in Marketing</h4>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Learning Outcome</strong>
-
-									</h5>
-									<ul>
-										<li>Cultivate sales habits of top Fortune 500 executives</li>
-										<li>Learn the power of creating and utilizing "personal
-											identity" to amplify your multitude of strengths</li>
-										<li>Develop lasting behaviors that will make you a stand
-											out professional</li>
-									</ul>
-								</div>
-
-							</div>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Audience</strong>
-									</h5>
-									<ul>
-										<li>SalesManagers and Executives</li>
-									</ul>
-								</div>
-							</div>
-							<h4>Chartered Post Graduate Diploma in Marketing</h4>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Learning Outcome</strong>
-
-									</h5>
-									<ul>
-										<li>Cultivate sales habits of top Fortune 500 executives</li>
-										<li>Learn the power of creating and utilizing "personal
-											identity" to amplify your multitude of strengths</li>
-										<li>Develop lasting behaviors that will make you a stand
-											out professional</li>
-									</ul>
-								</div>
-
-							</div>
-							<div class="col-sm-12">
-								<div class="info-div grad1">
-									<h5>
-										<strong>Audience</strong>
-									</h5>
-									<ul>
-										<li>SalesManagers and Executives</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<p><a href="http://nimn.com.ng/">Learn more</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="row" style="margin-bottom: 1%">
 					<div class="col-sm-12 cert-view no-padding-div">
 						<div class="col-sm-12 cert-view-header no-padding-div">
@@ -360,6 +264,97 @@
 				<div class="row" style="margin-bottom: 1%;">
 					<div class="col-sm-12 cert-view no-padding-div">
 						<div class="col-sm-12 cert-view-header no-padding-div">
+							<h3>NIMN</h3>
+						</div>
+						<div class="col-sm-12 no-padding-div cert-view-content">
+							<p style="margin-bottom: 0px">The National Institute of Marketing of Nigeria (NIMN) is the body for professionals engaged in marketing and related fields. Membership is compulsory for all marketing practitioners in Nigeria.
+							 The NIMN provides trainings, examinations and consultancy activities as a means of ensuring that its members adopt professional approach to marketing</p>
+						</div>
+						<div class="col-sm-12 no-padding-div cert-view-content">
+							<h4>Foundation Certificate in Marketing</h4>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Learning Outcome</strong>
+
+									</h5>
+									<ul>
+										<li>Understand fundamentals of marketing</li>
+										<li>Understand fundamentals of selling</li>
+										<li>Develop marketing communication skills</li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Audience</strong>
+									</h5>
+									<ul>
+										<li>Degree Holders and experienced marketing professionals</li>
+									</ul>
+								</div>
+							</div>
+							<h4>Chartered Graduate Diploma in Marketing</h4>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Learning Outcome</strong>
+
+									</h5>
+									<ul>
+										<li>Understand business analysis</li>
+										<li>Learn to conduct marketing research</li>
+										<li>Develop skills in electronic marketing</li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Audience</strong>
+									</h5>
+									<ul>
+										<li>Degree holders and holders of NIMN Foundation Certificate in Marketing</li>
+									</ul>
+								</div>
+							</div>
+							<h4>Chartered Post Graduate Diploma in Marketing</h4>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Learning Outcome</strong>
+
+									</h5>
+									<ul>
+										<li>Understand strategic marketing management</li>
+										<li>Learn product development & brand management</li>
+										<li>Develop skills in distribution and logistics management</li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="col-sm-12">
+								<div class="info-div grad1">
+									<h5>
+										<strong>Audience</strong>
+									</h5>
+									<ul>
+										<li>Holders of the NIMN Chartered Graduate Diploma in Marketing</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<p><a href="http://nimn.com.ng/">Learn more</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-bottom: 1%;">
+					<div class="col-sm-12 cert-view no-padding-div">
+						<div class="col-sm-12 cert-view-header no-padding-div">
 							<h3>CMMP</h3>
 						</div>
 						<div class="col-sm-12 no-padding-div cert-view-content">
@@ -370,18 +365,54 @@
 						<div class="col-sm-12 no-padding-div cert-view-content">
 							<h4>Associate CMMP</h4>
 							<div class="col-sm-12">
-								
+								<div class="info-div grad1">
+									<h5>
+										<strong>Criteria</strong>
+
+									</h5>
+									<ul>
+										<li>meet specific academic requirements</li>
+										<li>meet specific work experience requirements</li>
+										<li>go through certain mandatory courses</li>
+										<li>pass an exam demonstrating competencies in the workplace</li>
+										
+									</ul>
+								</div>
+
 							</div>
-							
-						
 							<h4>Manager CMMP</h4>
-							
 							<div class="col-sm-12">
-								
+								<div class="info-div grad1">
+									<h5>
+										<strong>Criteria</strong>
+
+									</h5>
+									<ul>
+										<li>meet specific academic requirements</li>
+										<li>meet specific work experience requirements</li>
+										<li>go through certain mandatory courses</li>
+										<li>pass an exam demonstrating competencies in the workplace</li>
+										<li>successfully complete <strong>Associate CMMP</strong> level</li>
+									</ul>
+								</div>
+
 							</div>
+							
 							<h4>Executive CMMP</h4>
 							<div class="col-sm-12">
-								
+								<div class="info-div grad1">
+									<h5>
+										<strong>Criteria</strong>
+
+									</h5>
+									<ul>
+										<li>meet specific academic requirements</li>
+										<li>meet specific work experience requirements</li>
+										<li>go through certain mandatory courses</li>
+										<li>pass an exam demonstrating competencies in the workplace</li>
+										<li>successfully complete <strong>Manager CMMP</strong> level</li>
+									</ul>
+								</div>
 
 							</div>
 						
@@ -397,7 +428,7 @@
 										<li>meet specific work experience requirements</li>
 										<li>go through certain mandatory courses</li>
 										<li>pass an exam demonstrating competencies in the workplace</li>
-										<li>successfully complete previous CMMP level where appropriate</li>
+										<li>successfully complete <strong>Executive CMMP</strong> level</li>
 									</ul>
 								</div>
 
@@ -406,6 +437,7 @@
 								<p><a href="http://www.theiimp.org/cmmp-designation/">Learn more</a></p>
 						</div>
 					</div>
+				</div>
 				</div>
 								<div class="row" style="margin-bottom: 1%">
 					<div class="col-sm-12 cert-view no-padding-div">
@@ -453,7 +485,7 @@
 						</div>
 					</div>
 					</div>			
-			</div>
+			
 			</div>
 			<div class="col-sm-4">
 				<%@ include file="/WEB-INF/pages/certification-sidebar.html"%>

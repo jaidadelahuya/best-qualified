@@ -396,11 +396,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/bq/coaching/home</url-pattern>
 	</servlet-mapping>
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 16fe53527c317bbcaf2cc1c72cd579956f6486f6
 	<servlet>
 		<servlet-name>SaveJobAlert</servlet-name>
 		<servlet-class>com.bestqualified.servlets.SaveJobAlert</servlet-class>

@@ -189,6 +189,7 @@
 							</div>
 						</div>
 					</div>
+					</div>
 					<div class="row" style="margin-bottom: 1%">
 						<div class="col-sm-12 cert-view no-padding-div">
 							<div class="col-sm-12 cert-view-header no-padding-div">
@@ -288,7 +289,7 @@
 					
 				</div>
 				
-			</div>
+			
 			<div class="col-sm-4">
 						<%@ include file="/WEB-INF/pages/certification-sidebar.html"%>
 					</div>

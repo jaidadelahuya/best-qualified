@@ -72,11 +72,7 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 16fe53527c317bbcaf2cc1c72cd579956f6486f6
 	<div class="container">
 		<div class="row alert alert-warning" style="text-align: center">
 			<div class="col-sm-12">

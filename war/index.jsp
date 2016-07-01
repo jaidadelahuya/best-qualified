@@ -412,6 +412,7 @@ div.transbox form input {
 	<br>
 	<br>
 	<br>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -464,7 +465,7 @@ div.transbox form input {
 					<div class="media-body">
 						<h4 class="media-heading">
 							<strong><a href="/bq/coaching/home"
-								style="text-decoration: none;">GUDIANCE & HAND HOLDING</a></strong>
+								style="text-decoration: none;">GUIDANCE & HAND HOLDING</a></strong>
 						</h4>
 						<h5 class="jobss">Get hired in industries of your choice</h5>
 						<p class="plat">Latest career advice will be sent to your
@@ -484,10 +485,7 @@ div.transbox form input {
 					<div class="media-body">
 						<h4 class="media-heading">
 							<a href="/community"><strong>OUR NETWORK</strong></a>
-<<<<<<< HEAD
-=======
 
->>>>>>> 16fe53527c317bbcaf2cc1c72cd579956f6486f6
 						</h4>
 						<h5 class="jobsss">Get hired in industries of your choice</h5>
 						<p class="plat">Plug into new communities that can improve
@@ -553,7 +551,7 @@ div.transbox form input {
 						<li>Post jobs and monitor your applications</li>
 						<li>Use our extensive database to search candidates</li>
 						<li><i>And much more...</i></li>
-					</ul>
+					</ ul>
 
 					<div style="text-align: center;">
 						<p>
