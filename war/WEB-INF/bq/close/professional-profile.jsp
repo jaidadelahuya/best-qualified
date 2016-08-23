@@ -238,7 +238,8 @@ h4 {
 										<input type="hidden" id="item" value="work-experience" /> <input
 											type="hidden" id="web-key" value="${item.safeKey}" />
 										<p>
-											<a class="delete-item" href="<c:url value='#' />">Delete</a>
+											<a class="delete-item"
+												href="<c:url value='/bq/close/general-delete?id=${item.safeKey}&item=work-experience' />">Delete</a>
 										</p>
 									</div>
 								</c:forEach>
@@ -341,7 +342,8 @@ h4 {
 										<input type="hidden" id="item" value="education" /> <input
 											type="hidden" id="web-key" value="${item.safeKey}" />
 										<p>
-											<a class="delete-item" href="#">Delete</a>
+											<a class="delete-item"
+												href="<c:url value="/bq/close/general-delete?id=${item.safeKey}&item=education" />">Delete</a>
 										</p>
 									</div>
 								</c:forEach>
@@ -415,7 +417,8 @@ h4 {
 										<input type="hidden" id="item" value="award" /> <input
 											type="hidden" id="web-key" value="${item.safeKey}" />
 										<p>
-											<a class="delete-item" href='<c:url value="/bq/close/general-delete?id=${item.safeKey}&item=award" />'>Delete</a>
+											<a class="delete-item"
+												href='<c:url value="/bq/close/general-delete?id=${item.safeKey}&item=award" />'>Delete</a>
 										</p>
 									</div>
 								</c:forEach>
@@ -479,8 +482,7 @@ h4 {
 												<c:out value='${item.year}' />
 											</span>
 										</h5>
-										<input type="hidden" id="item" value="certification" /> <input
-											type="hidden" id="ws-key" value="${item.webKey}" />
+
 										<p>
 											<a class="delete-item"
 												href='<c:url value="/bq/close/general-delete?id=${item.webKey}&item=certification" />'>Delete</a>
@@ -721,11 +723,10 @@ h4 {
 															method : "POST",
 															data : form
 																	.serialize(),
-															dataType : "json",
 															success : function(
 																	data) {
 																window.location
-																		.assign("/bq/close/professional-profile");
+																		.assign(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/bq/close/professional-profile");
 																console
 																		.log("here")
 																console
@@ -736,6 +737,9 @@ h4 {
 																		.prop(
 																				"value",
 																				"Saved");
+															},
+															error : function () {
+																
 															},
 															complete : function() {
 																me
@@ -977,19 +981,21 @@ h4 {
 															});
 												}
 											});
-							$('.delete-item').click(
-									function(e) {
-										e.preventDefault();
-										var x = $(this).prop('href');
-										$.ajax({
-											url : x,
-											success : function() {
-												$(this).closest(".module-div")
-														.remove();
-											}
+							$('.delete-item').click(function(e) {
+								e.preventDefault();
+								var x = $(this).prop('href');
+								var par = $(this).closest(".module-div");
+								$.ajax({
+									url : x,
+									success : function(data) {
+										par.remove();
+									},
+									error : function() {
+										alert("Cannot delete at this this");
+									}
 
-										});
-									});
+								});
+							});
 
 							$("#cv-form")
 									.on(

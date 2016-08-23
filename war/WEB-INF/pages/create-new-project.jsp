@@ -47,19 +47,21 @@ p {
 	<%@ include file="/main-nav.html"%>
 	<div class="container" style="margin-top: 6%;">
 		<div class="col-sm-offset-2 col-sm-8">
-			<div class="card-panel">
-				<div class="row">
+			<div class="card-panel" style="padding-top: 0px">
+				<div class="row"
+					style="background-color: #c4cde0; padding: 2%; margin-left: -20px; margin-right: -20px">
 					<div class="form-group col-sm-12">
 						<p class="text-info"
-							style="font-size: 14pt; margin-bottom: 4px; font-weight: bold;">Create
-							A Project</p>
-
+							style="font-size: 12pt; margin-bottom: 4px; font-weight: bold; color: #2f4779">
+							Create A Project</p>
+						<p class="text-info" style="color: #983b59; font-size: 10pt">
+							Manage your Job posts and Applicants</p>
+						<p class="text-info" style="color: #983b59; font-size: 10pt">
+							All fields with asterisk (*) are required</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-12">
-						<p class="text-info" style="color: red; font-size: 10pt">*
-							Manage your Job posts and Applicants</p>
 						<div class="msg-div"></div>
 					</div>
 				</div>
@@ -84,7 +86,7 @@ p {
 					<div class="row">
 						<div class="form-group col-sm-12">
 							<p class="text-info" id="show-job"
-								style="font-size: 11pt; margin-bottom: 4px; font-weight: bold; cursor: pointer;">
+								style="font-size: 11pt; margin-bottom: 4px; font-weight: bold; cursor: pointer; color: #2f4779">
 								<span style="margin-right: 2%;"
 									class="glyphicon glyphicon-triangle-bottom"></span>Add a Job
 								Post to your project
@@ -92,13 +94,7 @@ p {
 						</div>
 					</div>
 					<div id="job-div">
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<p class="text-info" style="color: red; font-size: 10pt">*
-									All fields with asterisk (*) are required</p>
-								<div class="msg-div"></div>
-							</div>
-						</div>
+						
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<input class="form-control" name="job-title"
@@ -191,14 +187,14 @@ p {
 							<div class="form-group col-sm-12">
 								<input class="form-control" name="skills" placeholder="Skills" />
 							</div>
-						</div>	
+						</div>
 					</div>
 
 
 					<div class="row">
 						<div class="form-group col-sm-12">
 							<p class="text-info" id="show-com"
-								style="font-size: 11pt; margin-bottom: 4px; font-weight: bold; cursor: pointer;">
+								style="font-size: 11pt; margin-bottom: 4px; font-weight: bold; cursor: pointer;color: #2f4779">
 								<span style="margin-right: 2%;"
 									class="glyphicon glyphicon-triangle-right"></span>Add Company
 								Information
@@ -219,9 +215,9 @@ p {
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-12">
-								<span style="font-size: 10pt; color: red">Company Logo
+								<span style="font-size: 10pt; color: #983b59">Company Logo
 									(Recommended size: 120px by 120px)</span> <input class="form-control"
-									name="company-logo" placeholder="Company Logo" type="file" />
+									name="image" placeholder="Company Logo" type="file" />
 							</div>
 
 						</div>
@@ -234,8 +230,7 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<input type="Submit" value="Finish"
-								class="btn btn-success">
+							<input type="Submit" value="Finish" class="btn btn-success">
 						</div>
 					</div>
 				</form>
@@ -270,14 +265,14 @@ p {
 											"glyphicon-triangle-right glyphicon-triangle-bottom");
 						});
 		$("#show-com")
-		.click(
-				function() {
-					$("#com-div").slideToggle();
-					$(this)
-							.find("span")
-							.toggleClass(
-									"glyphicon-triangle-right glyphicon-triangle-bottom");
-				});
+				.click(
+						function() {
+							$("#com-div").slideToggle();
+							$(this)
+									.find("span")
+									.toggleClass(
+											"glyphicon-triangle-right glyphicon-triangle-bottom");
+						});
 	</script>
 
 </body>

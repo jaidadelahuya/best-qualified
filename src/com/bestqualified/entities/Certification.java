@@ -55,6 +55,7 @@ public class Certification implements Serializable {
 	}
 	public void setId(Key id) {
 		this.id = id;
+		this.webKey = KeyFactory.keyToString(id);
 	}
 	public String getName() {
 		return name;

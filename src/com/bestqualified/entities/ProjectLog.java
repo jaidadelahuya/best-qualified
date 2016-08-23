@@ -10,7 +10,7 @@ import com.google.appengine.api.datastore.Text;
 public class ProjectLog implements Serializable {
 
 	public enum Activity {
-			CREATE,CLOSE,INVITE,SAVE_SEARH,SHORT_LIST
+			CREATE,CLOSE,INVITE,SAVE_SEARH,SHORT_LIST,UPDATE
 	}
 	/**
 	 * 

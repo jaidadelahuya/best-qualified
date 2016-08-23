@@ -17,6 +17,7 @@ import com.bestqualified.entities.CandidateProfile;
 import com.bestqualified.entities.Education;
 import com.bestqualified.entities.User;
 import com.bestqualified.util.EntityConverter;
+import com.bestqualified.util.Util;
 import com.google.appengine.api.datastore.Key;
 
 public class AddAward extends HttpServlet {
@@ -25,6 +26,7 @@ public class AddAward extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -8198793608466812452L;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,46 +34,50 @@ public class AddAward extends HttpServlet {
 		String description = req.getParameter("extra");
 		String startMonth = req.getParameter("start-month");
 		String startYear = req.getParameter("start-year");
-		
-		
-		Award a = new Award();
-		a.setDescription(description);
-		a.setMonth(startMonth);
-		a.setName(name);
-		a.setYear(startYear);
-		
-		HttpSession session = req.getSession();
-		User u = null;
-		CandidateProfile cp = null;
-		ProfessionalProfileBean ppb = null;
-		synchronized (session) {
-			u = (User) session.getAttribute("user");
-			cp = (CandidateProfile) session.getAttribute("professionalProfile");
-			ppb = (ProfessionalProfileBean) session.getAttribute("uppb");
+
+		if (Util.notNull(name, startMonth, startYear)) {
+	
+			Award a = new Award();
+			a.setDescription(description);
+			a.setMonth(startMonth);
+			a.setName(name);
+			a.setYear(startYear);
+
+			HttpSession session = req.getSession();
+			User u = null;
+			CandidateProfile cp = null;
+			ProfessionalProfileBean ppb = null;
+			synchronized (session) {
+				u = (User) session.getAttribute("user");
+				cp = (CandidateProfile) session
+						.getAttribute("professionalProfile");
+				ppb = (ProfessionalProfileBean) session.getAttribute("uppb");
+			}
+
+			if (cp != null && u != null && cp.getId().equals(u.getUserInfo())) {
+
+				List<Award> aw = ppb.getAwards();
+				if (aw == null) {
+					aw = new ArrayList<>();
+				}
+				aw.add(0, a);
+				ppb.setAwards(aw);
+				List<Key> keys = cp.getAwards();
+				if (keys == null) {
+					keys = new ArrayList<>();
+				}
+				keys.add(a.getId());
+				cp.setAwards(keys);
+				synchronized (session) {
+					session.setAttribute("professionalProfile", cp);
+					session.setAttribute("uppb", ppb);
+				}
+				GeneralController.createWithCrossGroup(
+						EntityConverter.candidateProfileToEntity(cp),
+						EntityConverter.awardToEntity(a));
+			}
 		}
 
-		if (cp != null && u != null && cp.getId().equals(u.getUserInfo())) {
-			
-			List<Award> aw = ppb.getAwards();
-			if(aw == null) {
-				aw = new ArrayList<>();
-			}
-			aw.add(0, a);
-			ppb.setAwards(aw);
-			List<Key> keys = cp.getAwards();
-			if (keys == null) {
-				keys = new ArrayList<>();
-			}
-			keys.add(a.getId());
-			cp.setAwards(keys);
-			synchronized (session) {
-				session.setAttribute("professionalProfile", cp);
-				session.setAttribute("uppb",ppb );
-			}
-			GeneralController.createWithCrossGroup(
-					EntityConverter.candidateProfileToEntity(cp),
-					EntityConverter.awardToEntity(a));
-		}
 	}
 
 }

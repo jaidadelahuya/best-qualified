@@ -56,14 +56,14 @@
 				<div class="row">
 					<div class="col-sm-12 no-padding-div"
 						style="background-color: #e0c4cd">
-						<div class="col-sm-3">
+						<div class="col-sm-3" style="padding: 1%;">
 							<img alt=""
 								<c:choose><c:when test='${not empty projectBean.companyLogo }'>src="${projectBean.companyLogo}"</c:when><c:otherwise>src='/images/company.png'</c:otherwise></c:choose>
 								class="img img-responsive">
 						</div>
 						<div class="col-sm-4">
-							<h4>
-								<a href="#"><c:out value="${projectBean.job.title}" /></a>
+							<h4 style="color: #3b5998">
+								<c:out value="${projectBean.job.title}" />
 							</h4>
 							<h5 style="font-family: calibri">
 								<c:choose>
@@ -90,7 +90,7 @@
 									class="btn btn-success btn-lg">Update</a>
 							</p>
 						</div>
-						<div class="col-sm-5">
+						<div class="col-sm-5" style="padding: 1%;">
 							<div class="card-panel"
 								style="background-color: #ebeef4; color: #983b59">
 								<div class="card-list">

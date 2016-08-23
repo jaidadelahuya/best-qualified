@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,12 +67,12 @@ public class SaveProject extends HttpServlet {
 		String salary = req.getParameter("salary");
 		String experience = req.getParameter("experience");
 		String allowLinkedIn = req.getParameter("allow-LinkedIn");
-		
+
 		BlobstoreService bss = BlobstoreServiceFactory.getBlobstoreService();
 		Map<String, List<BlobKey>> map = bss.getUploads(req);
 		List<BlobKey> blobkeys = map.get("image");
 		BlobKey imageKey = null;
-		if(blobkeys != null && !blobkeys.isEmpty()) {
+		if (blobkeys != null && !blobkeys.isEmpty()) {
 			imageKey = blobkeys.get(0);
 		}
 
@@ -84,46 +85,62 @@ public class SaveProject extends HttpServlet {
 		if (!Util.notNull(projectName)) {
 			session.setAttribute("updateProjectError",
 					"Your project should have a name.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(jobTitle)) {
 			session.setAttribute("updateProjectError",
 					"Your job post should have a title.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(jobLocation)) {
 			session.setAttribute("updateProjectError",
 					"Add location to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(applicationUrl)) {
 			session.setAttribute("updateProjectError",
 					"Add an application URL or email to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(applicationDeadline)) {
 			session.setAttribute("updateProjectError",
 					"Add an application deadline to your job post");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
+			return;
+		}
+		
+		if (!Util.notNull(jobRole)) {
+			session.setAttribute("updateProjectError",
+					"Add a job roles to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(jobDesc)) {
 			session.setAttribute("updateProjectError",
 					"Add a job description to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(careerLevel)) {
 			session.setAttribute("updateProjectError",
 					"Add a career level to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(educationLevel)) {
 			session.setAttribute("updateProjectError",
 					"Add an education level to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 		if (!Util.notNull(jobType)) {
 			session.setAttribute("updateProjectError",
 					"Add a job type to your job post.");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getRequestURI()));
 			return;
 		}
 
@@ -132,119 +149,208 @@ public class SaveProject extends HttpServlet {
 			o = session.getAttribute("projectBean");
 		}
 
-		if (Util.notNull(webkey) && o != null) {
+		if (Util.notNull(webkey) && o != null) {// we are updating
+
+			Key key = KeyFactory.stringToKey(webkey);
+			Project project = EntityConverter.entityToProject(GeneralController
+					.findByKey(key));
+			Key jobKey = project.getJobs();
+			Job job = null;
+			if (jobKey == null) {
+				job = new Job();
+				project.setJobs(job.getId());
+			} else {
+				job = EntityConverter.entityToJob(GeneralController
+						.findByKey(project.getJobs()));
+			}
+
+			// projectBean
 			boolean projectChanged = false;
 			ProjectBean pb = (ProjectBean) o;
-
 			if (!pb.getName().equalsIgnoreCase(projectName)) {
 				pb.setName(projectName);
+				project.setName(projectName);
 				projectChanged = true;
 			}
-			if (Util.notNull(projectDescription)) {
+			if (Util.notNull(projectDescription) && !projectDescription.equals(pb.getDescription())) {
 				pb.setDescription(projectDescription);
 				projectChanged = true;
 			}
 
-			if (projectChanged) {
-				Key key = KeyFactory.stringToKey(webkey);
-				Project project = EntityConverter
-						.entityToProject(GeneralController.findByKey(key));
-				project.setName(projectName);
-				if (Util.notNull(projectDescription)) {
-					project.setDescription(new Text(projectDescription));
-				}
-				GeneralController.create(EntityConverter
-						.projectToEntity(project));
-
-				// job things
-				FullJobBean fjb = pb.getJob();
-				if(fjb == null) {
-					fjb = new FullJobBean();
-				}
-				Key jobKey = project.getJobs();
-				Job job = null;
-				if (jobKey == null) {
-					job = new Job();
-					project.setJobs(job.getId());
-				} else {
-					job = EntityConverter.entityToJob(GeneralController
-							.findByKey(project.getJobs()));
-				}
-
-				boolean jobChanged = false;
-
-				if (!jobTitle.equalsIgnoreCase(fjb.getTitle())) {
-					fjb.setTitle(jobTitle);
-					job.setJobTitle(jobTitle);
-					jobChanged = true;
-				}
-				if (!jobLocation.equalsIgnoreCase(fjb.getLocation())) {
-					fjb.setLocation(jobLocation);
-					jobChanged = true;
-				}
-				if (!applicationUrl.equalsIgnoreCase(fjb.getApplicationUrl())) {
-					fjb.setApplicationUrl(applicationUrl);
-					;
-					jobChanged = true;
-				}
-				if (!applicationDeadline.equalsIgnoreCase(
-						fjb.getApplicationDeadline())) {
-					fjb.setApplicationDeadline(applicationDeadline);
-					jobChanged = true;
-				}
-				if (!jobDesc.equalsIgnoreCase(fjb.getJobDesc())) {
-					fjb.setJobDesc(jobDesc);
-					jobChanged = true;
-				}
-				if (!careerLevel.equalsIgnoreCase(fjb.getCareerLevel())) {
-					fjb.setCareerLevel(careerLevel);
-					jobChanged = true;
-				}
-				if (!educationLevel.equalsIgnoreCase(fjb.getEducationLevel())) {
-					fjb.setEducationLevel(educationLevel);
-					jobChanged = true;
-				}
-				if (!jobType.equalsIgnoreCase(fjb.getJobType())) {
-					fjb.setEducationLevel(educationLevel);
-					jobChanged = true;
-				}
-
-				if (Util.notNull(jobRole) && !jobRole.equals(fjb.getJobRole())) {
-					fjb.setJobRole(jobRole);
-					jobChanged = true;
-				}
-
-				if (Util.notNull(salary)
-						&& !salary.equals(fjb.getSalaryRange())) {
-					fjb.setSalaryRange(salary);
-					jobChanged = true;
-				}
-
-				if (Util.notNull(experience)
-						&& !experience.equals(fjb.getYearsOfExperience())) {
-					fjb.setYearsOfExperience(experience);
-					jobChanged = true;
-				}
-
-				if (Util.notNull(skills) && !skills.equals(fjb.getSkills())) {
-					fjb.setSkills(skills);
-					jobChanged = true;
-				}
-
-				
-
-				if (allowLinkedIn == null) {
-					fjb.setApplyWithLinkedIn(false);
-				} else {
-					fjb.setApplyWithLinkedIn(true);
-				}
-
+			// jobBean
+			boolean jobChanged = false;
+			FullJobBean fjb = pb.getJob();
+			if (fjb == null) {
+				fjb = new FullJobBean();
 			}
 
-		}else {
+			if (!jobTitle.equalsIgnoreCase(fjb.getTitle())) {
+				fjb.setTitle(jobTitle);
+				job.setJobTitle(jobTitle);
+				jobChanged = true;
+			}
+			if (!jobLocation.equalsIgnoreCase(fjb.getLocation())) {
+				fjb.setLocation(jobLocation);
+				job.setLocation(jobLocation);
+				jobChanged = true;
+			}
+			if (!applicationUrl.equalsIgnoreCase(fjb.getApplicationUrl())) {
+				fjb.setApplicationUrl(applicationUrl);
+				job.setApplicationUrl(applicationUrl);
+				jobChanged = true;
+			}
+			if (!applicationDeadline.trim().equalsIgnoreCase(fjb
+					.getApplicationDeadline())) {
+				fjb.setApplicationDeadline(applicationDeadline);
+				try {
+					job.setClosingDate(new SimpleDateFormat("MM/dd/yyyy")
+							.parse(applicationDeadline));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				jobChanged = true;
+			}
+			if (!jobDesc.equalsIgnoreCase(fjb.getJobDesc())) {
+				fjb.setJobDesc(jobDesc);
+				job.setDescription(new Text(jobDesc));
+				jobChanged = true;
+			}
+			if (!careerLevel.equalsIgnoreCase(fjb.getCareerLevel())) {
+				fjb.setCareerLevel(careerLevel);
+				job.setCareerLevel(careerLevel);
+				jobChanged = true;
+			}
+			if (!educationLevel.equalsIgnoreCase(fjb.getEducationLevel())) {
+				fjb.setEducationLevel(educationLevel);
+				job.setEducationLevel(educationLevel);
+				jobChanged = true;
+			}
+			if (!jobType.equalsIgnoreCase(fjb.getJobType())) {
+				fjb.setEducationLevel(educationLevel);
+				job.setJobType(jobType);
+				jobChanged = true;
+			}
+
+			if (Util.notNull(jobRole) && !jobRole.equals(fjb.getJobRole())) {
+				fjb.setJobRole(jobRole);
+				job.setJobRoles(new Text(jobRole));
+				jobChanged = true;
+			}
+
+			if (Util.notNull(salary) && !salary.equals(fjb.getSalaryRange())) {
+				fjb.setSalaryRange(salary);
+				job.setSalaryRange(salary);
+				jobChanged = true;
+			}
+
+			if (Util.notNull(experience)
+					&& !experience.equals(fjb.getYearsOfExperience())) {
+				fjb.setYearsOfExperience(experience);
+				job.setExperience(experience);
+				jobChanged = true;
+			}
+
+			if (Util.notNull(skills) && !skills.equals(fjb.getSkills())) {
+				fjb.setSkills(skills);
+				job.setSkills(Arrays.asList(skills.split(",")));
+				jobChanged = true;
+			}
+
+			if (allowLinkedIn == null) {
+				fjb.setApplyWithLinkedIn(false);
+			} else {
+				fjb.setApplyWithLinkedIn(true);
+				jobChanged = true;
+			}
+
+			boolean companyChanged = false;
+			Key comKey = job.getCompany();
+			Company c = null;
+			if(comKey == null) {
+				c = new Company();
+				job.setCompany(c.getId());
+				jobChanged = true;
+			}else {
+				c = EntityConverter.entityToCompany(GeneralController
+						.findByKey(comKey));
+			}
+			 
+			if (Util.notNull(companyName)
+					&& !companyName.equals(c.getCompanyName())) {
+				c.setCompanyName(companyName);
+				//pb.setCompanyName(companyName);
+				companyChanged = true;
+			}
+			
+			if (Util.notNull(companyWebsite)
+					&& !companyWebsite.equals(c.getCompanyWebsite())) {
+				c.setCompanyWebsite(companyWebsite);
+				//pb.setCompanyWebsite(companyWebsite);
+				companyChanged = true;
+			}
+
+			
+			if (Util.notNull(companyDescription) && c.getDescription() != null
+					&& !companyDescription.equals(c.getDescription().getValue())) {
+				c.setDescription(new Text(companyDescription));
+				pb.setCompanyDesc(companyDescription);
+				companyChanged = true;
+			}
+			
+			if(imageKey != null) {
+				BlobKey bk = c.getLogo();
+				if(bk != null) {
+					BlobstoreService bs = BlobstoreServiceFactory.getBlobstoreService();
+					bs.delete(bk);
+				}
+				c.setLogo(imageKey);
+				pb.setCompanyLogo(Util.getPictureUrl(imageKey));
+				companyChanged = true;
+			}
+			
+			ProjectLog pl = new ProjectLog();
+			pl.setActivity(Activity.UPDATE);
+			pl.setDate(new Date());
+			
+			Entity e1 = null;
+			Entity e2 = null;
+			Entity e3 = null;
+			Entity e4 = null;
+			
+			List<Entity> ents = new ArrayList<>();
+			if(projectChanged) {
+				e1  = EntityConverter.projectToEntity(project);
+				ents.add(e1);
+			}
+			if(jobChanged) {
+				e2 = EntityConverter.jobToEntity(job);
+				ents.add(e2);
+			}
+			if(companyChanged) {
+				e3 = EntityConverter.companyToEntity(c);
+				ents.add(e3);
+			}
+			
+			if(projectChanged | jobChanged | companyChanged) {
+				e4 = EntityConverter.projectLogToEntity(pl);
+				ents.add(e4);
+			}
+			
+			if(ents.size()!=0) {
+				GeneralController.createWithCrossGroup(ents);
+			}
+			
+			resp.sendRedirect(resp
+					.encodeRedirectURL("/bq/closed/recruiter/project?id="
+							+ webkey));
+			
+			
+
+		} else {
 			Project p = new Project();
 			p.setDateCreated(new Date());
-			if(!Util.notNull(projectDescription)) {
+			if (!Util.notNull(projectDescription)) {
 				p.setDescription(new Text(projectDescription));
 			}
 			ProjectLog pl = new ProjectLog();
@@ -253,11 +359,12 @@ public class SaveProject extends HttpServlet {
 			keys.add(pl.getId());
 			p.setLogs(keys);
 			p.setName(projectName);
-		
+
 			Job j = new Job();
 			p.setJobs(j.getId());
-			
-			j.setAllowLinkedInApplication((Util.notNull(projectDescription)?true:false));
+
+			j.setAllowLinkedInApplication((Util.notNull(projectDescription) ? true
+					: false));
 			j.setApplicationUrl(applicationUrl);
 			j.setCareerLevel(careerLevel);
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -277,14 +384,14 @@ public class SaveProject extends HttpServlet {
 				o1 = session.getAttribute("user");
 				o2 = session.getAttribute("employerProfile");
 			}
-			
-			if(o1==null || o2 ==null) {
+
+			if (o1 == null || o2 == null) {
 				return;
-			}else {
+			} else {
 				u = (User) o1;
 				r = (Recruiter) o2;
 			}
-			
+
 			j.setEmployer(u.getUserKey());
 			j.setExperience(experience);
 			j.setJobRoles(new Text(jobRole));
@@ -292,49 +399,49 @@ public class SaveProject extends HttpServlet {
 			j.setJobType(jobType);
 			j.setLocation(jobLocation);
 			j.setSalaryRange(salary);
-			
-			
+
 			List<Key> pKeys = r.getProjects();
-			if(pKeys == null) {
+			if (pKeys == null) {
 				pKeys = new ArrayList<>();
 			}
-			
+
 			pKeys.add(p.getId());
 			r.setProjects(pKeys);
 			Company c = null;
-			//company
-			if(Util.notNull(companyName)) {
-				c=new Company();
+			// company
+			if (Util.notNull(companyName)) {
+				c = new Company();
 				j.setCompany(c.getId());
 				c.setCompanyName(companyName);
-				
-				if(Util.notNull(companyDescription)) {
+
+				if (Util.notNull(companyDescription)) {
 					c.setDescription(new Text(companyDescription));
 				}
-				
+
 				c.setCompanyWebsite(companyWebsite);
 				c.setLogo(imageKey);
 			}
 			synchronized (session) {
 				session.setAttribute("employerProfile", r);
 			}
-			
+
 			Entity e1 = EntityConverter.projectToEntity(p);
 			Entity e2 = EntityConverter.projectLogToEntity(pl);
 			Entity e3 = EntityConverter.jobToEntity(j);
 			Entity e4 = null;
 			Entity e5 = EntityConverter.recruiterToEntity(r);
-			
-			if(c != null){
+
+			if (c != null) {
 				e4 = EntityConverter.companyToEntity(c);
-				GeneralController.createWithCrossGroup(e1,e2,e3,e4,e5);
-			}else {
-				GeneralController.createWithCrossGroup(e1,e2,e3,e5);
+				GeneralController.createWithCrossGroup(e1, e2, e3, e4, e5);
+			} else {
+				GeneralController.createWithCrossGroup(e1, e2, e3, e5);
 			}
-			
-			resp.sendRedirect(resp.encodeRedirectURL("/bq/closed/recruiter/project?id="+p.getSafeKey()));
-			
-					
+
+			resp.sendRedirect(resp
+					.encodeRedirectURL("/bq/closed/recruiter/project?id="
+							+ p.getSafeKey()));
+
 		}
 
 	}

@@ -40,6 +40,12 @@
 p {
 	margin-bottom: 0px;
 }
+
+label {
+	font-family: calibri;
+	color: #983b59;
+	font-size: 9pt;
+}
 </style>
 </head>
 <body
@@ -47,40 +53,43 @@ p {
 	<%@ include file="/main-nav.html"%>
 	<div class="container" style="margin-top: 6%;">
 		<div class="col-sm-offset-2 col-sm-8">
-			<div class="card-panel">
-			<form method="post"
+			<div class="card-panel" style="padding-top: 0px">
+				<form method="post"
 					action="<%=blobstoreService.createUploadUrl(
 					"/bq/close/recruiter/project/save", options)%>"
 					enctype="multipart/form-data">
-					
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<p class="text-info"
-							style="font-size: 12pt; margin-bottom: 4px; font-weight: bold;">
-							Update Project:
-							<c:out value='${projectBean.name}' />
-						</p>
-						<p class="text-info" style="color: red; font-size: 10pt">*
-							Manage your Job posts and Applicants</p>
-						<p class="text-info" style="color: red; font-size: 10pt">* All
-							fields with asterisk (*) are required</p>
+
+					<div class="row"
+						style="background-color: #c4cde0; padding: 2%; margin-left: -20px; margin-right: -20px">
+						<div class="form-group col-sm-12">
+							<p class="text-info"
+								style="font-size: 12pt; margin-bottom: 4px; font-weight: bold; color: #2f4779">
+								Update Project: <span style="color: #983b59;"><c:out
+										value='${projectBean.name}' /></span>
+							</p>
+							<p class="text-info" style="color:#983b59; font-size: 10pt">
+								Manage your Job posts and Applicants</p>
+							<p class="text-info" style="color: #983b59; font-size: 10pt">
+								All fields with asterisk (*) are required</p>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<div class="msg-div"></div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<div class="msg-div"></div>
+						</div>
 					</div>
-				</div>
 					<div class="row">
 
 						<div class="form-group col-sm-12">
-							<input name="project-key" type="hidden" value="${projectBean.webKey}">
-							<input class="form-control" name="project-name"
+							<input name="project-key" type="hidden"
+								value="${projectBean.webKey}"> <label>* Project
+								Name</label> <input class="form-control" name="project-name"
 								value='${projectBean.name}' placeholder="* Project Name"
 								required="required" />
 
 						</div>
 						<div class="form-group col-sm-12">
+							<label>Project Description</label>
 							<textarea rows="2" class="form-control"
 								name="project-description" placeholder="Project Description">${projectBean.description}</textarea>
 						</div>
@@ -89,23 +98,23 @@ p {
 
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<p class="text-info" style="font-size: 12pt; font-weight: bold;">
+							<p class="text-info" style="font-size: 12pt; font-weight: bold; color: #2f4779">
 								Job Information: <span style="color: green"><c:out
 										value='${projectBean.job.title}' /></span>
 							</p>
 
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<input class="form-control" name="job-title"
-								value="${projectBean.job.title}" placeholder="* Job Title"
-								required="required" />
+							<label>* Job Title</label> <input class="form-control"
+								name="job-title" value="${projectBean.job.title}"
+								placeholder="* Job Title" required="required" />
 						</div>
 						<div class="form-group col-sm-6">
-							<select class="form-control" required="required"
-								name="job-location">
+							<label>* Job Location</label> <select class="form-control"
+								required="required" name="job-location">
 								<option>${projectBean.job.location}</option>
 								<%@ include file="/partial/states.html"%>
 							</select>
@@ -113,12 +122,14 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<input class="form-control" name="application-url"
+							<label>* Application URL/Email</label> <input
+								class="form-control" name="application-url"
 								value="${projectBean.job.applicationUrl}"
-								placeholder="* Application URL/ Email" required="required" />
+								placeholder="* Application URL/Email" required="required" />
 						</div>
 						<div class="form-group col-sm-6">
-							<input class="form-control datepicker"
+							<label>* Application Deadline</label> <input
+								class="form-control datepicker"
 								value="${projectBean.job.applicationDeadline}"
 								name="application-deadline" required="required"
 								placeholder="* Application Deadline" />
@@ -126,6 +137,7 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
+							<label>* Job Role</label>
 							<textarea rows="4" class="form-control" required="required"
 								style="white-space: pre-wrap" name="job-role"
 								placeholder="* Job Role/Responsibilities">${projectBean.job.jobRole}</textarea>
@@ -133,6 +145,7 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
+							<label>* Job Description</label>
 							<textarea rows="4" class="form-control" required="required"
 								style="white-space: pre-wrap" name="job-description"
 								placeholder="* Job Description">${projectBean.job.jobDesc}</textarea>
@@ -140,71 +153,46 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<select class="form-control" name="career-level"
-								required="required">
+							<label>* Career Level</label> <select class="form-control"
+								name="career-level" required="required">
 								<option>${projectBean.job.careerLevel}</option>
-								<option value="101">Student (Undergraduate/Graduate)</option>
-								<option value="102">Entry Level</option>
-								<option value="103">Experienced (Non-Managerial)</option>
-								<option value="104">Manager (Manager/Supervisor of
-									Staff)</option>
-								<option value="105">Executive (SVP,VP,Department Head
-									etc)</option>
-								<option value="106">Senior Executive (President, CFO.
-									etc)</option>
+								<%@ include file='/partial/career-level.html' %>
 							</select>
 						</div>
 						<div class="form-group col-sm-6">
-							<select required="required" class="form-control"
-								name="education-level">
+							<label>* Education Level</label> <select required="required"
+								class="form-control" name="education-level">
 								<option>${projectBean.job.educationLevel}</option>
-								<option value="501">Higher National Diploma</option>
-								<option value="502">Bachelor's Degree</option>
-								<option value="503">Master's Degree</option>
-								<option value="504">Post Graduate Diploma</option>
-								<option value="505">Doctorate</option>
-								<option value="506">Professional</option>
+								<%@ include file='/partial/education.html' %>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<select class="form-control" required="required" name="job-type">
+							<label>* Job Type</label> <select class="form-control"
+								required="required" name="job-type">
 								<option>${projectBean.job.jobType}</option>
-								<option value="301">Freelance</option>
-								<option value="302">Full Time</option>
-								<option value="303">Internship</option>
-								<option value="304">Part Time</option>
-								<option value="305">Permanent</option>
-								<option value="306">Temporary</option>
+								<%@ include file='/partial/job-type.html' %>
 							</select>
 						</div>
 						<div class="form-group col-sm-6">
-							<select class="form-control" name="salary">
+							<label>Salary Range</label> <select class="form-control"
+								name="salary">
 								<option>${projectBean.job.salaryRange}</option>
-								<option value="201">10,000 - 50,000</option>
-								<option value="202">50,000 - 100,000</option>
-								<option value="203">100,000 - 300,000</option>
-								<option value="204">300,000 - 500,000</option>
-								<option value="205">Unspecified</option>
+								<%@ include file='/partial/salary-range.html' %>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<select class="form-control" name="experience">
+							<label>Years of experience</label> <select class="form-control"
+								name="experience">
 								<option>${projectBean.job.yearsOfExperience}</option>
-								<option value="401">0 - 1 year</option>
-								<option value="402">0 - 2 years</option>
-								<option value="403">1 - 3 years</option>
-								<option value="404">2 - 5 years</option>
-								<option value="405">3 - 5 years</option>
-								<option value="406">5 - 10 years</option>
-								<option value="407">7 - 10 years</option>
-								<option value="408">More than 10 years</option>
+								<%@ include file='/partial/years-of-experience.html' %>
 							</select>
 						</div>
 						<div class="form-group col-sm-6">
+							<label> </label>
 							<div class="checkbox">
 								<label
 									style="font-style: italic; color: #777; font-family: calibri; font-size: 10pt"><input
@@ -215,16 +203,19 @@ p {
 						</div>
 					</div>
 					<div class="row">
+
 						<div class="form-group col-sm-12">
-							<input class="form-control" value='${projectBean.job.skills}'
-								name="skills" placeholder="Skills" />
+							<label>Skills</label> <input class="form-control"
+								value='${projectBean.job.skills}' name="skills"
+								placeholder="Skills" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
+
 							<p class="text-info"
-								style="font-size: 12pt; margin-bottom: 4px; font-weight: bold;">
-								Company Information: <span><c:out
+								style="font-size: 12pt; margin-bottom: 4px; font-weight: bold; color: #2f4779">
+								Company Information: <span style="color: green"><c:out
 										value='${projectBean.companyName}' /></span>
 							</p>
 
@@ -232,24 +223,27 @@ p {
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<input class="form-control" name="company-name"
-								value="${projectBean.companyName}" placeholder="Company Name" />
+							<label>Company Name</label> <input class="form-control"
+								name="company-name" value="${projectBean.companyName}"
+								placeholder="Company Name" />
 						</div>
 						<div class="form-group col-sm-6">
-							<input class="form-control" name="company-website"
-								value="${projectBean.companyName}" placeholder="Company Website" />
+							<label>Company Website</label> <input class="form-control"
+								name="company-website" value="${projectBean.companyWebsite}"
+								placeholder="Company Website" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<span style="font-size: 10pt; color: red">Company Logo
-								(Recommended size: 120px by 120px)</span> <input class="form-control"
-								name="company-logo" placeholder="Company Logo" type="file" />
+							<label>Company Logo (Recommended size: 120px by 120px)</label> <input
+								class="form-control" name="image"
+								placeholder="Company Logo" type="file" />
 						</div>
 
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
+							<label>Company Description</label>
 							<textarea rows="4" class="form-control"
 								name="company-description" placeholder="Company Description">${projectBean.companyDesc}</textarea>
 						</div>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bestqualified.bean.FullJobBean;
 import com.bestqualified.bean.InterestedJob;
 import com.bestqualified.bean.JobInformation;
 import com.bestqualified.controllers.GeneralController;
@@ -71,21 +72,30 @@ public class JobServlet extends HttpServlet {
 			com = EntityConverter.entityToCompany(GeneralController
 					.findByKey(job.getCompany()));
 			ji.setCompanyName(com.getCompanyName());
+			
 			if (com.getLogo() == null) {
 				ji.setPictureUrl(StringConstants.DEFAULT_COMPANY_LOGO);
 			} else {
 				ji.setPictureUrl(Util.getPictureUrl(com.getLogo()));
 			}
-			ji.setCompanyDesc(com.getDescription().getValue());
+			if(com.getDescription()!=null) {
+				ji.setCompanyDesc(com.getDescription().getValue());
+			}
+			
 		} else {
 			ji.setCompanyName("Confidential");
 			ji.setPictureUrl(StringConstants.DEFAULT_COMPANY_LOGO);
 		}
+		
+		
 
 		ji.setPageUrl(resp.encodeURL("/bq/open/job?job-key=" + webSafeKey));
 		ji.setWebKey(webSafeKey);
 		ji.setJobTitle(job.getJobTitle());
-
+		ji.setCloseDate(job.getClosingDate());
+		if(job.getJobRoles()!= null) {
+			ji.setJobRole(job.getJobRoles().getValue());
+		}
 		ji.setDatePosted(Util.getPostedTime(job.getDatePosted()));
 		ji.setJobDesc(job.getDescription().getValue());
 		ji.setExperience(job.getExperience());
@@ -96,6 +106,8 @@ public class JobServlet extends HttpServlet {
 		ji.setApplicationWebsite(job.getEducationLevel());
 		ji.setDeadline(new SimpleDateFormat("dd-MMM-YYYY").format(job
 				.getClosingDate()));
+		ji.setSalaryRange(job.getSalaryRange());
+		ji.setQualification(job.getEducationLevel());
 
 		List<InterestedJob> ijs = Util.getRelatedJobs(job);
 		ji.setRelatedJobs(ijs);
@@ -111,7 +123,7 @@ public class JobServlet extends HttpServlet {
 			session.setAttribute("jobInformation", ji);
 
 		}
-		resp.sendRedirect(resp.encodeRedirectURL("/bq/open/job-information"));
+		req.getRequestDispatcher("/bq/open/job-information").include(req, resp);
 	}
 
 }
