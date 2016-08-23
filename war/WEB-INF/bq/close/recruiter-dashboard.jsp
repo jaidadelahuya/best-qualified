@@ -162,10 +162,10 @@
 										type="button" data-toggle="dropdown">
 										Action <span class="caret"></span>
 									</button>
-									<ul class="dropdown-menu">
-										<li><a href="#">Close Project</a></li>
-										<li><a href="#">Edit Project</a></li>
-										<li><a href="#">View Job Post</a></li>
+									<ul class="dropdown-menu" style="background-color: #fff">
+										<li><a href="<c:url value='/bq/closed/recruiter/project?id=${item.webKey}' />">View</a></li>
+										<li><a href="/bq/close/recruiter/project/edit">Update </a></li>
+										<li><a href="<c:url value='/bq/closed/recruiter/close-project?id=${item.webKey}' />">Close</a></li>
 									</ul>
 								</div>
 

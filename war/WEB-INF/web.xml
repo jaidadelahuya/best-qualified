@@ -24,6 +24,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>CloseProject</servlet-name>
+		<servlet-class>com.bestqualified.servlets.closed.CloseProject</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CloseProject</servlet-name>
+		<url-pattern>/bq/closed/recruiter/close-project</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>LikeArticle</servlet-name>
 		<servlet-class>com.bestqualified.servlets.LikeArticle</servlet-class>
 	</servlet>
