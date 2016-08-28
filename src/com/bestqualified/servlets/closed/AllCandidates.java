@@ -152,7 +152,7 @@ public class AllCandidates extends HttpServlet {
 				ProView pv = new ProView();
 				pv.setFirstName(sd.getOnlyField("firstName").getText());
 				pv.setLastName(sd.getOnlyField("lastName").getText());
-				//pv.setPictureUrl(sd.getOnlyField("pictureUrl").getAtom());
+				pv.setPictureUrl(sd.getOnlyField("pictureUrl").getAtom());
 				pv.setYearsOfExperience(sd.getOnlyField("yearsOfExperience").getAtom());
 				pv.setHighestQualification(sd.getOnlyField("highestEducationLevel").getText());
 				pv.setWebkey(sd.getId());

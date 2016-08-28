@@ -29,6 +29,19 @@
 <link rel="stylesheet" href="/styles/animate.css">
 
 <style type="text/css">
+
+.modal-footer{
+	background-color: #ebeef4
+}
+.modal-header {
+	color: white;
+	background-color: #758ab6
+}
+
+.modal-body {
+	background-color: #f5f6f9
+}
+
 .subnav li {
 	list-style: none;
 	display: inline;
@@ -391,83 +404,70 @@
 					</div>
 				</div>
 			</form>
-			<div class="col-sm-6"
-				style="background-color: white; border: 1px solid #dadada; border-top: none;">
-				<div class="row"
-					style="border: 1px solid #2f4779; padding: 1%; background-color: #3b5998">
-					<div class="col-sm-4" style="padding-top: 1%;">
-						<input type="checkbox"> <select disabled="disabled"
-							id="bulk-action"><option value="" disabled selected
-								hidden>--ACTION--</option>
-							<option value="1">Add To Project</option>
-							<option value="2">Invite</option>
-							<option value="3">Remove</option></select>
-					</div>
-					<div class="col-sm-6"
-						style="padding-top: 1%; color: white; font-weight: bold">
+			<div class="col-sm-9">
+				<div class="row" style="border-bottom: 1px solid #2f4779;">
+
+					<div class="col-sm-6" style="padding-top: 1%; font-weight: bold">
 						<span class="results-found"><c:out
 								value='${recruiterDashboard.totalCandidates}' /></span> candidate(s)
 						found
 					</div>
-					<div class="col-sm-2" style="padding-top: 1%;">
+					<div class="col-sm-6" style="padding-top: 1%;">
 						<span class="pull-right" id="save-search"
-							style="color: white; font-weight: bold; font-size: 14pt; cursor: pointer;"><i
+							style="font-weight: bold; cursor: pointer;"><i
 							data-placement="bottom" data-toggle="tooltip" title="Save Search"
-							class="fa fa-floppy-o" aria-hidden="true"></i></span>
+							class="fa fa-floppy-o" aria-hidden="true"></i> Save Search</span>
 					</div>
 				</div>
-				<div id="list-container" class="col-sm-12 no-padding-div">
+
+				<div class="row" style="margin-top: 2%; margin-bottom: 2%;">
 					<c:forEach var="item" items="${recruiterDashboard.prospects}">
-						<div class="row"
-							style="padding: 2%; background-color: white; border-bottom: 1px solid #dadada">
+						<div class="col-sm-3" style="margin-bottom: 2%;">
 							<input type="hidden" value="${item.webkey}" class="webkey">
 							<input type="hidden" value="${item.email}"
 								class="candidate-email">
-							<div class="col-sm-1" style="padding-top: 5%;">
-								<input class="select-prospect" type="checkbox">
-							</div>
-							<div class="col-sm-3" style="text-align: center">
-								<img class="img img-responsive img-circle" alt=""
-									style="margin: 0px"
-									<c:choose><c:when test='${empty item.pictureUrl }'> src="/images/unknown-user.jpg"</c:when><c:otherwise> src="${item.pictureUrl}"</c:otherwise></c:choose>>
-							</div>
-							<div class="col-sm-8 no-padding-div">
-								<h5 style="margin-bottom: 2px; font-size: 12pt">
-									<a href="<c:url value='/bq/closed/get-candidate-profile?web-key=${item.webkey}'/>" id="candidate-name"><c:out
-											value='${item.firstName}' /> <c:out value='${item.lastName}' /></a>
-									<i data-placement="bottom" data-toggle="tooltip"
-										title="Send Invite" style="color: #983b59; cursor: pointer;"
-										class="fa fa-envelope pull-right invite" aria-hidden="true"></i><i
-										style="color: #983b59" data-placement="bottom"
-										data-toggle="tooltip" title="Remove From List"
-										class="fa fa-trash pull-right" aria-hidden="true"></i>
-								</h5>
-								<div class="text-success" style="font-family: calibri">
-									<c:out value='${item.highestQualification}' />
-									<div class="dropdown pull-right">
-										<button class="btn btn-success add-to-project" type="button">Add
-											To Project</button>
-										<ul class="dropdown-menu"
-											style="background-color: white; padding: 2%;">
-											<c:forEach var="item" items="${recruiterDashboard.projects}">
-												<li><a href="<c:url value='' />"></a>${item.name}</li>
-											</c:forEach>
-										</ul>
+							<div class="card">
+								<img
+									<c:choose><c:when test='${empty item.pictureUrl }'> src="/images/unknown-user.jpg"</c:when><c:otherwise> src="${item.pictureUrl}"</c:otherwise></c:choose>
+									alt="Avatar" style="width: 100%">
+								<div style="padding: 5px 2px; text-align: center;">
+									<h5 style="margin-bottom: 3px">
+										<b><a
+											href="<c:url value='/bq/closed/get-candidate-profile?web-key=${item.webkey}'/>"
+											id="candidate-name"><c:out value='${item.firstName}' />
+												<c:out value='${item.lastName}' /></a></b>
+									</h5>
+									<p style="font-family: calibri; margin-bottom: 2px"
+										class="text-success">
+										<c:out value='${item.highestQualification}' />
+									</p>
+									<div class="text-info"
+										style="font-size: 10pt; font-stretch: narrower; font-style: italic;">
+										<c:out value='${item.yearsOfExperience}' />
+										years experience
 									</div>
-								</div>
-								<div class="text-info"
-									style="font-size: 10pt; font-stretch: narrower; font-style: italic;">
-									<c:out value='${item.yearsOfExperience}' />
-									years experience
+									<h5 style="margin-bottom: 2px; font-size: 12pt">
+										<i data-placement="bottom" data-toggle="tooltip"
+											title="Add To Project"
+											style="color: #983b59; cursor: pointer; margin-right: 4px; margin-left: 4px"
+											class="fa fa-plus add-to-project" aria-hidden="true"></i> <i
+											data-placement="bottom" data-toggle="tooltip"
+											title="Send Invite"
+											style="color: #983b59; cursor: pointer; margin-right: 4px; margin-left: 4px"
+											class="fa fa-envelope invite" aria-hidden="true"></i><i
+											style="color: #983b59; cursor: pointer; margin-right: 4px; margin-left: 4px"
+											data-placement="bottom" data-toggle="tooltip"
+											title="Remove From List" class="fa fa-trash"
+											aria-hidden="true"></i>
+									</h5>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
+
 			</div>
-			<div class="col-sm-3">
-				<%@ include file="/WEB-INF/pages/certification-sidebar.html"%>
-			</div>
+
 		</div>
 	</div>
 
@@ -475,8 +475,9 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content"  style="background-color: #c4cde0; color: #17233c;">
-				<div class="modal-header" style="background-color: #a24e69;">
+			<div class="modal-content"
+				style="background-color: #c4cde0; color: #17233c;">
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Save Search</h4>
 				</div>
@@ -508,11 +509,11 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" style="background-color: #c4cde0; color: #17233c;">
-				<div class="modal-header" style="background-color: #a24e69; color: #17233c;">
+			<div class="modal-content">
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">
-						Adding <span id="no-of-candidates"></span> candidate(s) to
+						Adding <span id="no-of-candidates"></span> candidate to
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -539,7 +540,8 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" style="background-color: #c4cde0; color: #17233c;">
+			<div class="modal-content"
+				style="background-color: #c4cde0; color: #17233c;">
 				<div class="modal-header" style="background-color: #a24e69;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4>
@@ -566,7 +568,8 @@
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<input type="hidden" id="invitee-key" name="invitee-key"> <label>Message</label>
+							<input type="hidden" id="invitee-key" name="invitee-key">
+							<label>Message</label>
 							<textarea name="invite-text" rows="6" class="form-control"
 								style="white-space: pre-wrap;"></textarea>
 						</div>

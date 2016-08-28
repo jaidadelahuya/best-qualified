@@ -34,6 +34,15 @@
 	display: inline;
 	margin-right: 2%;
 }
+
+.proview {
+	padding: 2%;
+	border-bottom: 1px solid #dadada
+}
+[class~='proview']:last-of-type {
+	border-bottom: none;
+}
+
 </style>
 </head>
 <body
@@ -180,10 +189,10 @@
 			<div class="col-sm-4 card-panel">
 
 				
-					<h4 style="color: #a24e69">Suggested Candidates</h4>
+					<h4 style="color: #a24e69; font-weight: bold">Suggested Candidates</h4>
 				
 				<c:forEach var="item" items="${recruiterDashboard.prospects}">
-					<div class="row" style="margin-bottom: 4%;">
+					<div class="row proview" ">
 						<div class="col-sm-3">
 							<a
 								href="<c:url value='/bq/closed/get-candidate-profile?web-key=${item.webkey}'/>"><img
@@ -209,7 +218,7 @@
 						</div>
 					</div>
 				</c:forEach>
-
+				<a href="<c:url value='/bq/closed/all-candidates'/>">View More</a>
 			</div>
 		</div>
 	</div>

@@ -283,6 +283,7 @@ public class User implements Serializable {
 
 	public void setProfilePicture(BlobKey profilePicture) {
 		this.profilePicture = profilePicture;
+		this.setPictureUrl(Util.getPictureUrl(profilePicture));
 
 	}
 

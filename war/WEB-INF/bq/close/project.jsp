@@ -41,9 +41,7 @@
 										value="${projectBean.dateCreated}" /> </small></strong>
 						</h4>
 						<c:if test='${not empty projectBean.description}'>
-							<h5 style="color: #987a3b">
-								Description
-							</h5>
+							<h5 style="color: #987a3b">Description</h5>
 							<p style="font-family: calibri">
 								<c:out value='${projectBean.description}' />
 							</p>
@@ -73,7 +71,7 @@
 									<c:otherwise>Confidential</c:otherwise>
 								</c:choose>
 							</h5>
-							<h5>
+							<c:if test="${not empty projectBean.expiryDate}"><h5>
 								<i class="text-danger" style="font-family: calibri"> <c:choose>
 										<c:when test="${today gt projectBean.expiryDate}">
 											<span style="color: red; font-weight: bold">Expired</span>
@@ -84,7 +82,7 @@
 									</c:choose> <span style="color: white"><fmt:formatDate type="date"
 											dateStyle="long" value="${projectBean.expiryDate}" /></span>
 								</i>
-							</h5>
+							</h5></c:if>
 							<p>
 								<a href="<c:url value='/bq/close/recruiter/project/edit' />"
 									class="btn btn-success btn-lg">Update</a>
@@ -95,32 +93,32 @@
 								style="background-color: #ebeef4; color: #983b59">
 								<div class="card-list">
 
-									Short Listed: <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=short-list' />">Short Listed:</a> <span class="pull-right"><c:out
 											value='${projectBean.shortListed}' /></span>
 
 								</div>
 								<div class="card-list">
 
-									Invited: <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=invitees' />">Invited:</a> <span class="pull-right"><c:out
 											value='${projectBean.inviteSent}' /></span>
 
 								</div>
 								<div class="card-list">
 
-									New Applicants: <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">New Applicants:</a> <span class="pull-right"><c:out
 											value='${projectBean.newApplicants}' /></span>
 
 								</div>
 								<div class="card-list">
 
-									All Applicants: <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">All Applicants:</a> <span class="pull-right"><c:out
 											value='${projectBean.totalApplicants}' /></span>
 
 								</div>
 
 								<div class="card-list">
 
-									Saved Search: <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=saved-search' />">Saved Search:</a> <span class="pull-right"><c:out
 											value='${projectBean.savedSeach}' /></span>
 
 								</div>
@@ -130,11 +128,16 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<h4 style="color: #983b59; font-weight: bold;">Job Description</h4>
+						<c:if test="${not empty projectBean.job.jobDesc}">
+							<h4 style="color: #983b59; font-weight: bold;">Job
+								Description</h4>
+						</c:if>
 						<p>${projectBean.job.jobDesc}</p>
-						<h4 style="color: #983b59; font-weight: bold;">Job Role</h4>
+						<c:if test="${not empty projectBean.job.jobDesc}">
+							<h4 style="color: #983b59; font-weight: bold;">Job Role</h4>
+						</c:if>
 						<p>${projectBean.job.jobRole}</p>
-						
+
 					</div>
 				</div>
 
@@ -151,9 +154,13 @@
 				<strong style="display: block;">Company</strong>
 				<c:choose>
 					<c:when test='${not empty projectBean.companyName }'>
-						<p><c:out value="${projectBean.companyName}" /></p>
+						<p>
+							<c:out value="${projectBean.companyName}" />
+						</p>
 					</c:when>
-					<c:otherwise><p>Confidential</p></c:otherwise>
+					<c:otherwise>
+						<p>Confidential</p>
+					</c:otherwise>
 				</c:choose>
 
 				<c:if test='${not empty projectBean.job.careerLevel}'>
@@ -211,7 +218,8 @@
 			</div>
 
 			<c:if test="${not empty projectBean.companyName}">
-				<div class="card-panel" style="background-color: #758ab6;color: white">
+				<div class="card-panel"
+					style="background-color: #758ab6; color: white">
 					<h4 style="">Company Information</h4>
 					<p>${projectBean.companyName}</p>
 					<p>${projectBean.companyWebsite}</p>

@@ -26,6 +26,7 @@ import com.bestqualified.entities.ProjectLog.Activity;
 import com.bestqualified.entities.Recruiter;
 import com.bestqualified.entities.User;
 import com.bestqualified.util.EntityConverter;
+import com.bestqualified.util.SearchDocumentIndexService;
 import com.bestqualified.util.Util;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
@@ -156,16 +157,20 @@ public class SaveProject extends HttpServlet {
 					.findByKey(key));
 			Key jobKey = project.getJobs();
 			Job job = null;
+			boolean projectChanged = false;
 			if (jobKey == null) {
 				job = new Job();
+				job.setDatePosted(new Date());
 				project.setJobs(job.getId());
+				projectChanged = true;
+				
 			} else {
 				job = EntityConverter.entityToJob(GeneralController
 						.findByKey(project.getJobs()));
 			}
 
 			// projectBean
-			boolean projectChanged = false;
+			
 			ProjectBean pb = (ProjectBean) o;
 			if (!pb.getName().equalsIgnoreCase(projectName)) {
 				pb.setName(projectName);
@@ -290,9 +295,13 @@ public class SaveProject extends HttpServlet {
 				companyChanged = true;
 			}
 
-			
-			if (Util.notNull(companyDescription) && c.getDescription() != null
-					&& !companyDescription.equals(c.getDescription().getValue())) {
+			Text cd = c.getDescription();
+			String cst = null;
+			if(cd!=null) {
+				cst = cd.getValue();
+			}
+			if (Util.notNull(companyDescription)
+					&& !companyDescription.equals(cst)) {
 				c.setDescription(new Text(companyDescription));
 				pb.setCompanyDesc(companyDescription);
 				companyChanged = true;
@@ -324,6 +333,7 @@ public class SaveProject extends HttpServlet {
 				ents.add(e1);
 			}
 			if(jobChanged) {
+				Util.addToSearchIndex(job, c);
 				e2 = EntityConverter.jobToEntity(job);
 				ents.add(e2);
 			}
@@ -424,6 +434,8 @@ public class SaveProject extends HttpServlet {
 			synchronized (session) {
 				session.setAttribute("employerProfile", r);
 			}
+			
+			Util.addToSearchIndex(j, c);
 
 			Entity e1 = EntityConverter.projectToEntity(p);
 			Entity e2 = EntityConverter.projectLogToEntity(pl);

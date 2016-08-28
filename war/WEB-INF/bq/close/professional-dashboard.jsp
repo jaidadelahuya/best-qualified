@@ -30,8 +30,9 @@
 
 <style type="text/css">
 h4 {
-	color: 	#983b59
+	color: #983b59
 }
+
 .subnav li {
 	list-style: none;
 	display: inline;
@@ -65,7 +66,8 @@ h4 {
 					<div class="col-sm-12 no-padding-div" style="padding: 0px">
 						<div class="col-sm-8" style="border-right: 1px solid #eaeaea">
 
-							<img src="/images/unknown-user.jpg"
+							<img
+								<c:choose><c:when test="${empty user.pictureUrl}">src="/images/unknown-user.jpg"</c:when><c:otherwise>src="${user.pictureUrl}"</c:otherwise></c:choose>
 								class="img img-responsive img-circle"
 								/ style="width: 6em; float: left; margin: 1%; margin-right: 4%;">
 							<div style="padding: 1%;">
@@ -142,7 +144,7 @@ h4 {
 						<div class="col-sm-4">
 							<h5 class="text-info" style="font-size: 12pt">Profile Views
 								in Last 30 Days</h5>
-							<div style="">${professionalDashboard.companies} companies</div>
+							<div style="">${professionalDashboard.companies}companies</div>
 							,
 							<div style="">${professionalDashboard.professionals}
 								professionals</div>
@@ -155,9 +157,10 @@ h4 {
 				<div class="col-sm-12 card-panel"
 					style="padding: 2px; color: white; background-color: #a24e69">
 					<div class="col-sm-6">
-						<h4 style="cursor: pointer;color: white" id="article-trig">
+						<h4 style="cursor: pointer; color: white" id="article-trig">
 							<i class="fa fa-newspaper-o" aria-hidden="true"
-								style="padding-right: 1%;"></i> Write an article</h4>
+								style="padding-right: 1%;"></i> Write an article
+						</h4>
 					</div>
 					<div class="col-sm-6">
 						<h4 style="cursor: pointer; color: white;" id="discussion-trig">
@@ -358,7 +361,7 @@ h4 {
 
 	</div>
 
-	
+
 	<%@ include file="/WEB-INF/pages/footer.html"%>
 	<script src="/js/jquery-1.11.2.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -384,7 +387,7 @@ h4 {
 				$("#applied-jobs-div").slideToggle();
 
 			});
-			
+
 		});
 	</script>
 

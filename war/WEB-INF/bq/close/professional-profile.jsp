@@ -10,6 +10,7 @@
 <title><c:out value='${user.firstName} ${user.lastName}' /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/styles/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="/styles/jquery.webui-popover.min.css">
 <link rel="stylesheet" href="/styles/main.css">
@@ -53,15 +54,25 @@ h4 {
 		<br /> <br /> <br /> <br />
 		<div class="col-sm-7">
 			<div class="row ">
-				<div class="col-sm-12 card-panel no-padding-div">
+				<div class="col-sm-12 card-panel no-padding-div"
+					style="padding-bottom: 0px">
 
 					<h4 style="margin-bottom: 4%; font-weight: bold; color: #666666">Personal
 						Information</h4>
 					<div class="row">
 						<div class="col-sm-3">
-							<img alt="" src="/images/unknown-user.jpg"
-								class="img img-responsive"
-								style="width: 100%; margin: 2%; margin-top: 4%;">
+							<div style="position: relative;">
+								<img alt=""
+									<c:choose><c:when test="${empty user.pictureUrl}">src="/images/unknown-user.jpg"</c:when><c:otherwise>src="${user.pictureUrl}"</c:otherwise></c:choose>
+									class="img img-responsive profile-image"
+									style="width: 100%; margin: 2%; margin-top: 4%;">
+								<div style="text-align: center; margin-bottom: 1%;">
+									<span id="change-picture"
+										style="color: orange; cursor: pointer;">Change Picture</span>
+								</div>
+							</div>
+
+
 						</div>
 						<div class="col-sm-9" style="padding-top: 2%;">
 							<div class="col-sm-12 editable-div"
@@ -122,6 +133,17 @@ h4 {
 								</span> <span class="glyphicon glyphicon-pencil edit-tool"></span>
 							</div>
 						</div>
+
+					</div>
+					<div id="upload-picture-div"
+						style="background-color: #eaeaea; margin-left: -20px; margin-right: -20px; padding: 2% 4%; margin-top: 1%; display: none;">
+
+						<h4 style="font-weight: bold">Upload a profile picture</h4>
+						<form id="profile-image-form" method="post">
+							<input style="margin: 4px 0px" type="file" name="image" /> <input
+								type="button" id="upload-button" value="Upload" />
+						</form>
+
 					</div>
 				</div>
 			</div>
@@ -684,6 +706,66 @@ h4 {
 		$(document)
 				.ready(
 						function() {
+							$("#profile-image-form").submit(
+									function(e) {
+										e.preventDefault();
+										var me = $(this);
+										var x = me.prop("action");
+										$.ajax({
+											url : x,
+											type : 'POST',
+											data : new FormData(this),
+											processData : false,
+											contentType : false,
+											success : function(data) {
+												$(".profile-image").prop("src",data);
+												$("#upload-picture-div").slideUp();
+											},
+											error : function(jqXHR, status,
+													errorThrown) {
+
+											}
+										});
+									});
+
+							$("#upload-button").click(function(e) {
+								e.preventDefault();
+								$("#profile-image-form").submit();
+							});
+
+							$("#change-picture")
+									.click(
+											function(e) {
+												var x = $(this);
+												$
+														.ajax({
+															url : "/bq/close/upload/get",
+															data : {
+																'url' : "/bq/close/profile/picture/upload"
+															},
+															dataType : "json",
+															success : function(
+																	data) {
+																console
+																		.log(data);
+																$(
+																		"#profile-image-form")
+																		.prop(
+																				"action",
+																				data);
+																$(
+																		"#upload-picture-div")
+																		.slideDown();
+															},
+															error : function(
+																	xhr,
+																	status, val) {
+																console
+																		.log(xhr);
+															}
+														});
+
+											});
 
 							$("#first-name").keyup(function(event) {
 								if (event.keyCode == 13) {
@@ -726,7 +808,12 @@ h4 {
 															success : function(
 																	data) {
 																window.location
-																		.assign(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/bq/close/professional-profile");
+																		.assign(window.location.protocol
+																				+ "//"
+																				+ window.location.hostname
+																				+ ":"
+																				+ window.location.port
+																				+ "/bq/close/professional-profile");
 																console
 																		.log("here")
 																console
@@ -738,8 +825,8 @@ h4 {
 																				"value",
 																				"Saved");
 															},
-															error : function () {
-																
+															error : function() {
+
 															},
 															complete : function() {
 																me

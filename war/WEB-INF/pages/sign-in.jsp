@@ -254,7 +254,7 @@ p,div {
 						</div>
 						<div class="form-group">
 							<input class="login-btn" type="submit" value="Login In">
-							Don't have an account?<a href="#" style="font-weight: bold;">
+							Don't have an account?<a href="/sign-up-page" style="font-weight: bold;">
 								Sign Up </a>
 						</div>
 					</form>

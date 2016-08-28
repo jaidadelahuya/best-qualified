@@ -72,6 +72,7 @@ public class InitRecruiterMajorInterest4 extends HttpServlet {
 			c.setLogo(blobKey);
 			j.setCompany(c.getId());
 			Entity e1 = EntityConverter.companyToEntity(c);
+			e = EntityConverter.jobToEntity(j);
 			GeneralController.createWithCrossGroup(e,e1);
 		}else {
 			GeneralController.create(e);

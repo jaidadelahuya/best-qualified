@@ -62,8 +62,8 @@
 					<ul class="nav navbar-nav navbar-right"
 						style="margin-top: 4px; margin-right: 4px;">
 						<li style="margin: 0px auto; width: 3em; height: auto;"><img
-							id="imginfo" src="/images/unknown-user.jpg"
-							class="img img-responsive img-circle" alt=""
+							id="imginfo" <c:choose><c:when test="${empty user.pictureUrl}">src="/images/unknown-user.jpg"</c:when><c:otherwise>src="${user.pictureUrl}"</c:otherwise></c:choose>
+							class="img img-responsive img-circle profile-image" alt=""
 							style="cursor: pointer" /></li>
 					</ul>
 				</c:when>

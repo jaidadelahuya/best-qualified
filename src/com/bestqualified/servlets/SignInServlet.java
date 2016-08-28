@@ -61,7 +61,7 @@ public class SignInServlet extends HttpServlet {
 				session.setAttribute("signinError",
 						"Username/Password do not match");
 			}
-			resp.sendRedirect(resp.encodeRedirectURL("/sign-in"));
+			resp.sendRedirect(resp.encodeRedirectURL("/login"));
 			return;
 		} else {
 			synchronized (session) {

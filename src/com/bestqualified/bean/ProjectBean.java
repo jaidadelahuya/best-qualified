@@ -14,10 +14,10 @@ public class ProjectBean implements Serializable {
 	private static final long serialVersionUID = -7574324814935282277L;
 
 	private String webKey, name, description, 
-			jobTitle, companyLogo, companyName, companyWebsite, companyDesc;
+			jobTitle, companyLogo, companyName, companyWebsite, companyDesc, hotListCategory;
 	private int newApplicants, totalApplicants, inviteSent, shortListed,
 			savedSeach;
-	private List<ProView> shortlistedCandidates, invitees, applicants;
+	private List<ProView> hotList, shortlistedCandidates, applicants;
 	private FullJobBean job;
 	private List<SavedSearch> savedsearch;
 	private Date dateCreated, expiryDate;
@@ -48,6 +48,22 @@ public class ProjectBean implements Serializable {
 	}
 	
 	
+
+	public List<ProView> getApplicants() {
+		return applicants;
+	}
+
+	public void setApplicants(List<ProView> applicants) {
+		this.applicants = applicants;
+	}
+
+	public List<ProView> getShortlistedCandidates() {
+		return shortlistedCandidates;
+	}
+
+	public void setShortlistedCandidates(List<ProView> shortlistedCandidates) {
+		this.shortlistedCandidates = shortlistedCandidates;
+	}
 
 	public String getCompanyName() {
 		return companyName;
@@ -89,21 +105,7 @@ public class ProjectBean implements Serializable {
 		this.shortListed = shortListed;
 	}
 
-	public List<ProView> getInvitees() {
-		return invitees;
-	}
 
-	public void setInvitees(List<ProView> invitees) {
-		this.invitees = invitees;
-	}
-
-	public List<ProView> getApplicants() {
-		return applicants;
-	}
-
-	public void setApplicants(List<ProView> applicants) {
-		this.applicants = applicants;
-	}
 
 	public FullJobBean getJob() {
 		return job;
@@ -121,12 +123,20 @@ public class ProjectBean implements Serializable {
 		this.savedsearch = savedsearch;
 	}
 
-	public List<ProView> getShortlistedCandidates() {
-		return shortlistedCandidates;
+	public String getHotListCategory() {
+		return hotListCategory;
 	}
 
-	public void setShortlistedCandidates(List<ProView> shortlistedCandidates) {
-		this.shortlistedCandidates = shortlistedCandidates;
+	public void setHotListCategory(String hotListCategory) {
+		this.hotListCategory = hotListCategory;
+	}
+
+	public List<ProView> getHotList() {
+		return hotList;
+	}
+
+	public void setHotList(List<ProView> hotList) {
+		this.hotList = hotList;
 	}
 
 	public String getWebKey() {
