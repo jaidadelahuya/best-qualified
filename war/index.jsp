@@ -46,23 +46,22 @@
 			session.setAttribute("currentDate", date);
 		}
 	%>
-
 	<!-- carousel -->
 	<div id="my_carousel" class="carousel fade" data-ride="carousel">
 		<!-- methods: data-interval="3000" // seconds between transitions; set to "0" to make it not automatic
-       data-pause="false" // "hover" is the default
-       data-wrap="false" // "true" is the default
-  -->
+					  data-pause="false" // "hover" is the default
+					  data-wrap="false" // "true" is the default
+		-->
 
 		<!-- indicators -->
 		<!-- <ol class="carousel-indicators">-->
 		<!-- .active makes that carousel image the first to be shown in the rotation -->
 		<!-- data-target referrs to id of carousel; data-slide-to referrs to slide number in array starting with 0 -->
-		<!-- <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#my_carousel" data-slide-to="1" class=""></li>
-    <li data-target="#my_carousel" data-slide-to="2" class=""></li>
-   </ol>
-   -->
+		<!--	<li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+				<li data-target="#my_carousel" data-slide-to="1" class=""></li>
+				<li data-target="#my_carousel" data-slide-to="2" class=""></li>
+			</ol>
+			-->
 
 		<!-- carousel images -->
 		<div class="carousel-inner">
@@ -88,12 +87,9 @@
 
 	</div>
 	<!-- end .carousel -->
-
 	<br>
 	<br>
 	<br>
-
-
 
 	<div class="container">
 		<div class="row">
@@ -134,25 +130,6 @@
 						</p>
 					</div>
 				</div>
-                        <a class="pull-right" href="#"><img class="media-object img-rounded" src="/images/train.png"></a>
-                        <div class="media-body">
-                          <h4 class="media-heading" style="font-weight:bold !important;"><a href="/certifications/cert.html">DEMONSTRATE YOUR ABILITY</a></h4>
-                          <h5 class="jobs">Get hired in industries of your choice</h5>
-                           <p class="plat"> Free or affordable trainings to improve your career.</p>
-    						<p id="edi">
-    						<span><a href="#">ama</a></span>  
-    						<span><a href="#">apcon</a></span>  
-    						<span><a href="#">cim</a></span> 
-    						<span><a href="">nipr</a></span> 
-    						<span><a href="#">nimn</a></span>
-    						<span><a href="#">hse</a></span>
-    						<span><a href="#">oracle</a></span>
-    						<span><a href="#">.Net</a></span>
-    						<span><a href="#">cibm</a></span>
-    						<span><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
-    						</p> 
-                        </div>
-                 </div>
 			</div>
 		</div>
 
@@ -194,19 +171,6 @@
 
 					</div>
 				</div>
-
-                        <a class="pull-right" href="/bq/community/home"><img class="media-object img-rounded" src="/images/community.png"></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="/bq/community/home"><strong>OUR NETWORK</strong></a></h4>
-                          <h5 class="jobsss">Get hired in industries of your choice</h5>
-                          <p class="plat"> Plug into new communities that can improve your network.</p>
-                          <p id="edi">
-    					   <span>Over<a href="#"> 1000</a> groups of sales professional</span> 
-    						<span><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
-    					  </p>
-
-                        </div>
-                 </div>
 			</div>
 		</div>
 
@@ -224,12 +188,10 @@
 				<h4>FROM OUR COMMUNITY</h4>
 				<c:forEach var="item" items="${indexBean.articles}">
 					<div class="media">
-						<c:if test="${not empty item.pictureUrl }">
-							<a class="pull-left"
-								href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><img
-								class="media-object img-rounded" src="${item.pictureUrl}"
-								width="130" height="130"></a>
-						</c:if>
+						<c:if test="${not empty item.pictureUrl }"><a class="pull-left"
+							href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><img
+							class="media-object img-rounded" src="${item.pictureUrl}"
+							width="130" height="130"></a></c:if>
 						<div class="media-body">
 							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><h3
 									class="media-heading" id="lol">${item.title}</h3></a>
@@ -309,25 +271,22 @@
 					<c:forEach var="item" items="${indexBean.ijs}">
 						<li>
 							<h5>
-								<a href="/bq/open/job?job-key=${item.jobKey}"
-									data-toggle="tooltip" data-placement="right"
-									title="<c:out value="${item.jobTitle}" />" class="toola"> <c:out
-										value="${item.jobTitle}" /></a>
-							</h5>
+							<a href="/bq/open/job?job-key=${item.jobKey}" data-toggle="tooltip"  data-placement="right" title="<c:out value="${item.jobTitle}" />" class="toola">
+							<c:out value="${item.jobTitle}" /></a>
+							</h5> 
 							<div class="box">
-								<span style="font-family: calibri; color: #983b59" class="trunc"><c:out
-										value="${item.companyName}" /> </span> <span
-									style="font-family: calibri; color: #983b59" class="origin">
-									<p class="tort">
-										<c:out value="${item.companyName}" />
-									</p>
-								</span>
-								<p style="font-size: 10pt; color: #59983b; font-style: italic;"
-									class="timly">
-									<c:out value="${item.postedTime}" />
-								</p>
-							</div>
-
+							<span style="font-family: calibri; color: #983b59" class="trunc"><c:out value="${item.companyName}" />
+							</span>
+							<span style="font-family: calibri; color: #983b59" class="origin">
+							<p class="tort">
+							<c:out value="${item.companyName}" />
+							</p>
+							</span>
+							<p style="font-size: 10pt; color: #59983b; font-style: italic;" class="timly">
+								<c:out value="${item.postedTime}" />
+							</p>
+							</div>			
+							
 						</li>
 					</c:forEach>
 					<li style="background: rgba(78, 189, 163, 0.4);">
@@ -370,26 +329,26 @@
 	<script src="/js/jquery-1.11.2.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.webui-popover.min.js"></script>
-	<script type="text/javascript">
-		
-	</script>
+	<script type="text/javascript">	</script>
 	<script>
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
+		$(document).ready(function(){
+   		 $('[data-toggle="tooltip"]').tooltip(); 
 		});
 	</script>
 	<script>
-		$(document).ready(function() {
-			$(".box").hover(function() {
-				$(this).find(".trunc").css("display", "none");
-				$(this).find(".origin").css("display", "block");
-				$(this).find(".timly").css("display", "none");
-			}, function() {
-				$(this).find(".origin").css("display", "none");
-				$(this).find(".trunc").css("display", "block");
-				$(this).find(".timly").css("display", "block");
-			});
-		});
-	</script>
+	$(document).ready(function(){
+     $(".box").hover(function(){
+     	$(this).find(".trunc").css("display", "none");
+         $(this).find(".origin").css("display", "block");
+         $(this).find(".timly").css("display", "none");
+     },
+     	function(){
+         $(this).find(".origin").css("display", "none");
+         $(this).find(".trunc").css("display", "block");
+         $(this).find(".timly").css("display", "block");
+     	}
+     );
+});
+</script>
 </body>
 </html>
