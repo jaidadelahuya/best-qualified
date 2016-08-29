@@ -212,6 +212,7 @@ p,div {
 				<div class="col-sm-12 col-md-6 module-div"
 					style="background-color: rgba(227, 7, 7, 0.2)">
 					<div class="col-sm-12">
+<<<<<<< Updated upstream
 						<a href="/bq/community/home"><img
 							class="img img-responsive module-image" alt=""
 							src="/images/network.png"></a>
@@ -219,6 +220,13 @@ p,div {
 					<div class="col-sm-12 module-title">
 						<a style="color: white" href="/bq/community/home"><span
 							class="module-text">Our Network</span></a>
+=======
+						<a href="/bq/community/home"><img class="img img-responsive module-image" alt=""
+							src="/images/network.png"></a>
+					</div>
+					<div class="col-sm-12 module-title">
+						<a href="/bq/community/home" style="color: white"><span class="module-text">Our Network</span></a>
+>>>>>>> Stashed changes
 					</div>
 				</div>
 			</div>

@@ -60,7 +60,11 @@
 }
 
 /* Standard syntax */
+<<<<<<< Updated upstream
 @keyframes example1 {
+=======
+@keyframes example {
+>>>>>>> Stashed changes
     0%   {left:0px;}
     25%  {left:60%;}
     50%  {left:60%;}
@@ -68,6 +72,7 @@
     100% {left:0px;}
 }
 
+<<<<<<< Updated upstream
 #animation-div {
 	color: white;
 	background-color: darkblue;
@@ -95,6 +100,8 @@
     100% {background-color:#DA4453;}
 }
 
+=======
+>>>>>>> Stashed changes
 
 </style>
 </head>
@@ -785,12 +792,20 @@
 									</select>
 								</div>
 								<div class="col-sm-12 form-group">
+<<<<<<< Updated upstream
 									<label>Email: </label> <input class="form-control" id="ja-email"
+=======
+									<label>Email: </label> <input class="form-control" id="job-alert-email"
+>>>>>>> Stashed changes
 										placeholder="EMail">
 								</div>
 								<div class="col-sm-12 form-group" style="text-align: center">
 
+<<<<<<< Updated upstream
 									<input id="job-alert-sign-up" type="button" class="btn btn-lg btn-warning" value="Sign Up Now">
+=======
+									<input id="job-alert-sign-up" class="btn btn-lg btn-warning" value="Sign Up Now">
+>>>>>>> Stashed changes
 								</div>
 							</div>
 
@@ -857,6 +872,7 @@
 				.ready(
 						function() {
 							$("#job-alert-sign-up").click(function() {
+<<<<<<< Updated upstream
 								var email = $("#ja-email").val();
 								if(email == "") {
 									console.log("no way");
@@ -892,6 +908,8 @@
 									});
 								}
 								
+=======
+>>>>>>> Stashed changes
 								
 							});
 							$("#get-rated").click(function() {

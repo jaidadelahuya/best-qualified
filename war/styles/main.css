@@ -1257,7 +1257,6 @@ background-color
 
 #967ADC
 
-
 ;
 }
 75%
@@ -1388,6 +1387,7 @@ background-color
 	background-color: rgb(52, 81, 177) !important;
 	color: white !important
 }
+
 /*****************************************sign up css **************************************************/
 @media screen and (max-width: 1200px) {
 	.login-div {
