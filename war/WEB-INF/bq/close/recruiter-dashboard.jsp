@@ -39,10 +39,10 @@
 	padding: 2%;
 	border-bottom: 1px solid #dadada
 }
+
 [class~='proview']:last-of-type {
 	border-bottom: none;
 }
-
 </style>
 </head>
 <body
@@ -78,7 +78,8 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="card-panel" style="padding: 5px 10px;background-color: #ead7dd; z-index: 20">
+							<div class="card-panel"
+								style="padding: 5px 10px; background-color: #ead7dd; z-index: 20">
 								<h5>
 									<c:out value='${fn:length(recruiterDashboard.projects)}' />
 									Project(s)
@@ -125,29 +126,31 @@
 					<div class="row">
 						<div class="col-sm-2" style="padding-right: 0px">
 							<div class="card-panel">
-								<img alt="" <c:choose><c:when test='${not empty item.companyLogo}'>src="${item.companyLogo}"</c:when><c:otherwise>src="/images/company.png"</c:otherwise></c:choose>  class="img img-responsive">
+								<img alt=""
+									<c:choose><c:when test='${not empty item.companyLogo}'>src="${item.companyLogo}"</c:when><c:otherwise>src="/images/company.png"</c:otherwise></c:choose>
+									class="img img-responsive">
 							</div>
 						</div>
 						<div class="col-sm-10">
 							<div class="col-sm-12 no-padding-div card-panel">
-								<div class="col-sm-4 card-panel" 
+								<div class="col-sm-4 card-panel"
 									style="line-height: 1.8; background-color: #ead7dd">
 									<div>
-										<a href="#"><c:out value="${item.newApplicants}" /> new
-											applicants</a>
+										<a href="#"><c:out value="${item.savedSearchNo}" /> Saved
+											Search(es)</a>
 									</div>
 									<div>
-										<a href="#"><c:out value="${item.totalApplicants}" />
-											total applicants</a>
+										<a href="#"><c:out value="${item.shortListed}" /> Short
+											listed</a>
 									</div>
 									<div>
-										<a href="#"><c:out value="${item.inviteSent}" /> invites
+										<a href="#"><c:out value="${item.inviteSent}" /> Invites
 											sent</a>
 									</div>
 								</div>
 								<div class="col-sm-8">
 									<h4>
-										<a
+										<a class="c-project-name"
 											href="<c:url value='/bq/closed/recruiter/project?id=${item.webKey}' />"><c:out
 												value="${item.name}" /></a>
 									</h4>
@@ -158,12 +161,12 @@
 									<div>
 										<strong class="text-muted">Created:</strong>
 										<fmt:formatDate type="date" dateStyle="long"
-							value="${item.dateCreated}" />
+											value="${item.dateCreated}" />
 									</div>
 									<div class="">
 										<strong class="text-muted">Expires:</strong>
 										<fmt:formatDate type="date" dateStyle="long"
-							value="${item.expiryDate}" />
+											value="${item.expiryDate}" />
 									</div>
 								</div>
 								<div class="dropdown pull-right">
@@ -172,9 +175,12 @@
 										Action <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" style="background-color: #fff">
-										<li><a href="<c:url value='/bq/closed/recruiter/project?id=${item.webKey}' />">View</a></li>
-										<li><a href="/bq/close/recruiter/project/edit">Update </a></li>
-										<li><a href="<c:url value='/bq/closed/recruiter/close-project?id=${item.webKey}' />">Close</a></li>
+										<li><a
+											href="<c:url value='/bq/closed/recruiter/project?id=${item.webKey}' />">View</a></li>
+										<li><a href="/bq/close/recruiter/project/edit">Update
+										</a></li>
+										<li><a class="close-project"
+											href="<c:url value='/bq/closed/recruiter/close-project?id=${item.webKey}' />">Close</a></li>
 									</ul>
 								</div>
 
@@ -183,16 +189,12 @@
 					</div>
 				</c:forEach>
 			</div>
-
-
-
 			<div class="col-sm-4 card-panel">
+				<h4 style="color: #a24e69; font-weight: bold">Suggested
+					Candidates</h4>
 
-				
-					<h4 style="color: #a24e69; font-weight: bold">Suggested Candidates</h4>
-				
 				<c:forEach var="item" items="${recruiterDashboard.prospects}">
-					<div class="row proview" ">
+					<div class="row proview"">
 						<div class="col-sm-3">
 							<a
 								href="<c:url value='/bq/closed/get-candidate-profile?web-key=${item.webkey}'/>"><img
@@ -211,15 +213,39 @@
 								<c:out value='${item.highestQualification}' />
 							</div>
 							<div class="text-info"
-								style="font-size: 10pt; font-stretch: narrower; font-style: italic;">
+								style="font-size: 10pt; font-stretch: narrower; font-style: italic; color: #a24e69">
 								<c:out value='${item.yearsOfExperience}' />
 								years experience
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-				<a href="<c:url value='/bq/closed/all-candidates'/>">View More</a>
+				<div class="col-sm-12 pull-right">
+					<a href="<c:url value='/bq/closed/all-candidates'/>">View More</a>
+				</div>
 			</div>
+		</div>
+	</div>
+
+	<div id="close-project-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<h4>
+						You are about to close project <span id="closing-project"
+							style="color: #a24e69; font-weight: bold;"></span>
+					</h4>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success close-project-btn">Close
+						Project</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -230,5 +256,30 @@
 	<script src="/js/waitMe.js"></script>
 	<script src="/js/main.js"></script>
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var par = null;
+			var closingHref = null;
+			$(".close-project").click(function(e) {
+				e.preventDefault();
+				closingHref = $(this).prop('href');
+				par = $(this).closest(".row");
+				var projectName = par.find(".c-project-name").text();
+				$("#closing-project").text(projectName);
+				$("#close-project-modal").modal();
+			});
+			
+			$(".close-project-btn").click(function(data) {
+				$.ajax({
+					url : closingHref,
+					success : function(data) {
+						par.remove();
+						$("#close-project-modal").modal("hide");
+					}
+				});
+			});
+		});
+	</script>
+
 
 </body>

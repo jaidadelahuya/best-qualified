@@ -65,7 +65,6 @@ public class SendInviteServlet extends HttpServlet {
 				List<ProjectBean> pb = rdb.getProjects();
 				Project project = null;
 
-				
 				project = EntityConverter.entityToProject(GeneralController
 						.findByKey(KeyFactory.stringToKey(projectWebKey)));
 
@@ -87,7 +86,10 @@ public class SendInviteServlet extends HttpServlet {
 				if (list == null) {
 					list = new ArrayList<>();
 				}
-				list.add(KeyFactory.stringToKey(pv.getWebkey()));
+				if (!list.contains(KeyFactory.stringToKey(pv.getWebkey()))) {
+					list.add(KeyFactory.stringToKey(pv.getWebkey()));
+				}
+
 				project.setInvitees(list);
 
 				Entity e1 = EntityConverter.projectToEntity(project);

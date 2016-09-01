@@ -30,17 +30,7 @@
 
 <style type="text/css">
 
-.modal-footer{
-	background-color: #ebeef4
-}
-.modal-header {
-	color: white;
-	background-color: #758ab6
-}
 
-.modal-body {
-	background-color: #f5f6f9
-}
 
 .subnav li {
 	list-style: none;
@@ -434,7 +424,7 @@
 									<h5 style="margin-bottom: 3px">
 										<b><a
 											href="<c:url value='/bq/closed/get-candidate-profile?web-key=${item.webkey}'/>"
-											id="candidate-name"><c:out value='${item.firstName}' />
+											class="candidate-name"><c:out value='${item.firstName}' />
 												<c:out value='${item.lastName}' /></a></b>
 									</h5>
 									<p style="font-family: calibri; margin-bottom: 2px"
@@ -513,7 +503,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">
-						Adding <span id="no-of-candidates"></span> candidate to
+						Add <span id="no-of-candidates"></span> to a project
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -540,16 +530,13 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content"
-				style="background-color: #c4cde0; color: #17233c;">
-				<div class="modal-header" style="background-color: #a24e69;">
+			<div class="modal-content">
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4>
-						Invite: <span id="name-of-candidate"></span>
+						Invite <span id="name-of-candidate"></span>
 					</h4>
-					<h5>
-						Email: <span id="email-of-candidate"></span>
-					</h5>
+					
 				</div>
 				<div class="modal-body">
 					<form id="send-invite-form">
@@ -604,19 +591,18 @@
 									method : "POST",
 									data : $("#send-invite-form").serialize(),
 									success : function() {
-										alert("success");
+										$("#invite-modal").modal("hide");
 									}
 								});
 							});
 
 							$(".invite").click(function() {
-								var par = $(this).closest(".row");
+								var par = $(this).closest(".col-sm-3");
 								var x = par.find(".webkey").val();
-								var y = par.find("#candidate-name").text();
-								var z = par.find(".candidate-email").text();
+								var y = par.find(".candidate-name").text();
+								
 								$("#invitee-key").val(x);
 								$("#name-of-candidate").text(y);
-								$("#email-of-candidate").text(z);
 								$("#invite-modal").modal();
 
 							});
@@ -683,23 +669,24 @@
 															data : data,
 															dataType : "json",
 															success : function() {
-																$(
-																		"#project-modal")
-																		.modal(
-																				"hide");
+																
+																$("#project-modal").modal("hide");
+															},
+															error : function (xhr) {
+																console.log(xhr);
 															},
 															traditional : true
 														});
 											});
 							$(".add-to-project").click(function() {
-								$(".select-prospect").prop("checked", false);
 								webkeys = [];
-								var par = $(this).closest(".row");
+								var par = $(this).closest(".col-sm-3");
 								var inp = par.find(".webkey").val();
+								var name = par.find(".candidate-name").text();
 								webkeys[webkeys.length] = inp;
 
 								$("#project-modal").modal();
-								$("#no-of-candidates").text(webkeys.length);
+								$("#no-of-candidates").text(name);
 
 							});
 							$(".select-prospect")

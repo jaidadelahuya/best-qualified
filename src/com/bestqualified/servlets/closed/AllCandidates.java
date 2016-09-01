@@ -138,7 +138,7 @@ public class AllCandidates extends HttpServlet {
 					.build();
 			QueryOptions options = QueryOptions
 					.newBuilder().setLimit(10).setCursor(cursor).setSortOptions(sortOptions)
-					.setFieldsToReturn("firstName", "lastName", "highestEducationLevel",
+					.setFieldsToReturn("firstName", "lastName", "highestEducationLevel", "email",
 							"yearsOfExperience","pictureUrl").build();
 			Query query = Query.newBuilder().setOptions(options).build(rdb.getSearchString());
 			IndexSpec indexSpec = IndexSpec.newBuilder().setName("professionals").build();
@@ -150,6 +150,7 @@ public class AllCandidates extends HttpServlet {
 			List<ProView> pvs = new ArrayList<>();
 			for (ScoredDocument sd : result) { 
 				ProView pv = new ProView();
+				pv.setEmail(sd.getOnlyField("email").getAtom());
 				pv.setFirstName(sd.getOnlyField("firstName").getText());
 				pv.setLastName(sd.getOnlyField("lastName").getText());
 				pv.setPictureUrl(sd.getOnlyField("pictureUrl").getAtom());
@@ -176,7 +177,7 @@ public class AllCandidates extends HttpServlet {
 			synchronized (session) {
 				session.setAttribute("recruiterDashboard", rdb);
 			}
-			if(req.getRequestURI().equalsIgnoreCase("/bq/closed/find-candidates")) {
+			if(req.getRequestURI().equalsIgnoreCase("/bq/closed/find-candidates")) {// if ajax
 				resp.setContentType("application/json");
 				String json = new Gson().toJson(rdb);
 				resp.getWriter().write(json);

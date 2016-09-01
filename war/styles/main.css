@@ -1,4 +1,14 @@
+.modal-footer{
+	background-color: #ebeef4
+}
+.modal-header {
+	color: white;
+	background-color: #758ab6
+}
 
+.modal-body {
+	background-color: #f5f6f9
+}
 
 .btn-floating {
   display: inline-block;

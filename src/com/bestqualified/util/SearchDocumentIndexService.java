@@ -87,7 +87,7 @@ public class SearchDocumentIndexService {
 	 * it is the user id
 	 */
 	
-	public void deleteDocumentFromIndex(String documentId) {
+	public static void deleteDocumentFromIndex(String documentId) {
 		//Setup the Index
 		IndexSpec indexSpec = IndexSpec.newBuilder().setName("JobSearchDocuments").build(); 
 		Index index = SearchServiceFactory.getSearchService().getIndex(indexSpec);
@@ -95,4 +95,6 @@ public class SearchDocumentIndexService {
 		//Delete the Records from the Index
 		index.delete(documentId);
 	}
+
+	
 }

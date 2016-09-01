@@ -119,7 +119,7 @@
 								<div class="card-list">
 
 									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=saved-search' />">Saved Search:</a> <span class="pull-right"><c:out
-											value='${projectBean.savedSeach}' /></span>
+											value='${projectBean.savedSearchNo}' /></span>
 
 								</div>
 							</div>

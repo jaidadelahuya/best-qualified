@@ -44,6 +44,15 @@ public class GeneralController {
 			.getDatastoreService();
 	private static Transaction txn = null;
 
+	public static void delete(List<Key> allkeys) {
+		// TODO Auto-generated method stub
+		Key[] arrayK = new Key[allkeys.size()];
+		for (int i = 0; i < allkeys.size(); i++) {
+			arrayK[i] = allkeys.get(i);
+		}
+		ds.delete(arrayK);
+	}
+
 	public static List<Article> getLatestArticles(String categoryName, int i) {
 
 		List<Article> articles = new ArrayList<>();
@@ -126,21 +135,19 @@ public class GeneralController {
 		return articles;
 	}
 
-	/*public static List<Article> getNBQArticlesByDate(int no) {
-		List<Article> articles = new ArrayList<>();
-		Query q = new Query(Article.class.getSimpleName());
-		q.addSort("date", SortDirection.DESCENDING);
-		Filter f = new CompositeFilter(CompositeFilterOperator.OR,
-				Arrays.<Filter> asList(new FilterPredicate("category",
-						FilterOperator.EQUAL, ArticleCategory.ADVERTISING
-								.name(), new FilterPredicate("category", FilterOperator.EQUAL, ArticleCategory.CREATIVES.name()))));
-		PreparedQuery pq = ds.prepare(q);
-		List<Entity> ents = pq.asList(FetchOptions.Builder.withLimit(no));
-		for (Entity e : ents) {
-			articles.add(EntityConverter.entityToArticle(e));
-		}
-		return articles;
-	}*/
+	/*
+	 * public static List<Article> getNBQArticlesByDate(int no) { List<Article>
+	 * articles = new ArrayList<>(); Query q = new
+	 * Query(Article.class.getSimpleName()); q.addSort("date",
+	 * SortDirection.DESCENDING); Filter f = new
+	 * CompositeFilter(CompositeFilterOperator.OR, Arrays.<Filter> asList(new
+	 * FilterPredicate("category", FilterOperator.EQUAL,
+	 * ArticleCategory.ADVERTISING .name(), new FilterPredicate("category",
+	 * FilterOperator.EQUAL, ArticleCategory.CREATIVES.name())))); PreparedQuery
+	 * pq = ds.prepare(q); List<Entity> ents =
+	 * pq.asList(FetchOptions.Builder.withLimit(no)); for (Entity e : ents) {
+	 * articles.add(EntityConverter.entityToArticle(e)); } return articles; }
+	 */
 
 	public static List<ReadingList> getNReadingListByDate(int no) {
 		List<ReadingList> readingList = new ArrayList<>();

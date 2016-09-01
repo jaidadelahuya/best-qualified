@@ -16,7 +16,7 @@ public class ProjectBean implements Serializable {
 	private String webKey, name, description, 
 			jobTitle, companyLogo, companyName, companyWebsite, companyDesc, hotListCategory;
 	private int newApplicants, totalApplicants, inviteSent, shortListed,
-			savedSeach;
+			savedSearchNo;
 	private List<ProView> hotList, shortlistedCandidates, applicants;
 	private FullJobBean job;
 	private List<SavedSearch> savedsearch;
@@ -89,12 +89,12 @@ public class ProjectBean implements Serializable {
 		this.companyDesc = companyDesc;
 	}
 
-	public int getSavedSeach() {
-		return savedSeach;
+	public int getSavedSearchNo() {
+		return savedSearchNo;
 	}
 
-	public void setSavedSeach(int savedSeach) {
-		this.savedSeach = savedSeach;
+	public void setSavedSearchNo(int savedSearchNo) {
+		this.savedSearchNo = savedSearchNo;
 	}
 
 	public int getShortListed() {

@@ -1184,6 +1184,14 @@ public class Util {
 		if (project.getApplicants() != null) {
 			pb.setTotalApplicants(project.getApplicants().size());
 		}
+		
+		if(project.getShortListedCandidates() != null) {
+			pb.setShortListed(project.getShortListedCandidates().size());
+		}
+		
+		if(project.getSavedSearch() != null) {
+			pb.setSavedSearchNo(project.getSavedSearch().size());
+		}
 
 		pb.setWebKey(project.getSafeKey());
 		if (project.getJobs() != null) {

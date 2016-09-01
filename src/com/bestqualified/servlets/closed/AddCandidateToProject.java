@@ -23,6 +23,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Text;
+import com.google.gson.Gson;
 
 public class AddCandidateToProject extends HttpServlet {
 
@@ -35,6 +36,7 @@ public class AddCandidateToProject extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		resp.setContentType("application/json");
 		String projectKey = req.getParameter("project-key");
 		String[] candidateKeys = req.getParameterValues("candidate-key");
 		if(Util.notNull(projectKey)) {
@@ -70,6 +72,7 @@ public class AddCandidateToProject extends HttpServlet {
 						
 					}
 				}
+				rdb.setProjects(pbs);
 				synchronized (session) {
 					session.setAttribute("recruiterDashboard", rdb);
 				}
@@ -106,15 +109,12 @@ public class AddCandidateToProject extends HttpServlet {
 					Entity e = EntityConverter.projectToEntity(p);
 					GeneralController.create(e);
 				}
-				
-				
-				
-				
+				resp.getWriter().write(new Gson().toJson("Candidate Added"));
 				
 				
 
 			}else {
-				resp.getWriter().write("Could not add to project");
+				resp.getWriter().write(new Gson().toJson("Could not add to project"));
 			}
 		}
 		
