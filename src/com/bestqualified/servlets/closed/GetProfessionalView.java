@@ -52,6 +52,7 @@ public class GetProfessionalView extends HttpServlet {
 				for(Key k : keys) {
 					if(k.equals(KeyFactory.stringToKey(projectId))) {
 						p = EntityConverter.entityToProject(GeneralController.findByKey(k));
+						break;
 					}
 				}
 				List<Key> hotList = null;
@@ -61,6 +62,9 @@ public class GetProfessionalView extends HttpServlet {
 					hotList = p.getShortListedCandidates();
 					hotListCategory= "Short Listed";
 					break;
+				case "invitees" :
+					hotList = p.getInvitees();
+					hotListCategory = "Invitees";
 				}
 				if(hotList != null) {
 					List<ProView> pvs = new ArrayList<>();
@@ -69,15 +73,8 @@ public class GetProfessionalView extends HttpServlet {
 					}
 					
 					RecruiterDashboardBean rdb = (RecruiterDashboardBean) o1;
-					List<ProjectBean> pbs = rdb.getProjects();
-					for(ProjectBean pb : pbs) {
-						if(pb.getWebKey().equals(projectId)) {
-							pb.setHotList(pvs);
-							pb.setHotListCategory(hotListCategory);
-							break;
-						}
-					}
-					rdb.setProjects(pbs);
+					rdb.setHotList(pvs);
+					rdb.setHotListCategory(hotListCategory);
 					synchronized (session) {
 						session.setAttribute("recruiterDashboard", rdb);
 					}

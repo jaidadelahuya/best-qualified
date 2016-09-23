@@ -187,11 +187,11 @@ h4 {
 					</div>
 					<div class="col-sm-10 card-panel">
 						<div class="col-sm-3 no-padding-div">
-							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><img
+							<a href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><img
 								class="" src="${item.pictureUrl}" width="130" height="130"></a>
 						</div>
 						<div class="col-sm-9" style="padding: 2%;">
-							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><h3
+							<a href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><h3
 									class="media-heading" id="lol">${item.title}</h3></a>
 							<p class="text-muted">
 								<span><i class="fa fa-user"></i> BEST-QUALIFIED</span> <span><i
@@ -200,20 +200,10 @@ h4 {
 							</p>
 							<p>
 								${item.snippet}<span><a
-									href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><i
-										class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+									href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'>  <i>Read More</i></a></span>
 							</p>
 
-							<p id="socialo">
-								<span id="fb"> <a href=""><i
-										class="fa fa-facebook-square" aria-hidden="true"
-										style="color: #3b5998;"></i> Share</a></span> <span id="tw"><a
-									href=""><i class="fa fa-twitter-square" aria-hidden="true"
-										style="color: #00aced;"></i> Tweet</a></span> <span id="go"><a
-									href=""><i class="fa fa-google-plus-square"
-										aria-hidden="true" style="color: #F43222;"></i> Share</a></span>
-
-							</p>
+							
 						</div>
 					</div>
 				</div>

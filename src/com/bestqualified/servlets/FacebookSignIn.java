@@ -28,7 +28,7 @@ public class FacebookSignIn extends HttpServlet {
 			session.setAttribute("facebookState", state);
 		}
 		String redirect = resp
-				.encodeRedirectURL("http://localhost:8888/bq/open/facebook/callback");
+				.encodeRedirectURL("http://best-qualified.appspot.com/bq/open/facebook/callback");
 		String uri = "https://www.facebook.com/dialog/oauth?client_id="
 				+ clientId + "&redirect_uri=" + redirect + "&state=" + state
 				+ "&response_type=code&scope=email";

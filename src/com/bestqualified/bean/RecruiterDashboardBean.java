@@ -13,14 +13,40 @@ public class RecruiterDashboardBean implements Serializable {
 	private static final long serialVersionUID = 8867290829150190112L;
 	
 	private String name,imageUrl,tagLine,email;
-	private List<ProView> prospects;
+	private List<ProView> prospects, hotList;
 	private List<ProjectBean> projects;
 	private List<SavedSearch> savedSearch;
-	private String cursor, searchString;
+	private String cursor, searchString, hotListCategory;
 	private boolean moreCandidates;
 	private long totalCandidates;
 
 	
+	
+	
+	public List<ProView> getHotList() {
+		return hotList;
+	}
+
+
+
+	public void setHotList(List<ProView> hotList) {
+		this.hotList = hotList;
+	}
+
+
+
+	public String getHotListCategory() {
+		return hotListCategory;
+	}
+
+
+
+	public void setHotListCategory(String hotListCategory) {
+		this.hotListCategory = hotListCategory;
+	}
+
+
+
 	public long getTotalCandidates() {
 		return totalCandidates;
 	}

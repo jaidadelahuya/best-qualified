@@ -4,6 +4,18 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/general-error.jsp</location>
+	</error-page>
+	<servlet>
+		<servlet-name>GetProfessionalView</servlet-name>
+		<servlet-class>com.bestqualified.servlets.closed.GetProfessionalView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetProfessionalView</servlet-name>
+		<url-pattern>/bq/close/professional/category</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>SendEmails</servlet-name>
@@ -1244,12 +1256,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<context-param>
 		<param-name>LinkedInClientId</param-name>
-		<param-value>77ciyhkk0lhyeu</param-value>
+		<param-value>77vvpp8wmwkm8b</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>LinkedInClientSecret</param-name>
-		<param-value>vId8FSizvWEzzlA7</param-value>
+		<param-value>a8GvJTrmTTxNsRq3</param-value>
 	</context-param>
 
 	<context-param>

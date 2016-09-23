@@ -31,9 +31,9 @@ public class ChangePassword extends HttpServlet {
 		synchronized (session) {
 			o = session.getAttribute("user");
 		}
-		if(o == null) {
+		if (o == null) {
 			resp.sendRedirect(resp.encodeRedirectURL("/sign-in"));
-		}else{
+		} else {
 			u = (User) o;
 		}
 		if (!Util.notNull(pass1)) {
@@ -41,7 +41,7 @@ public class ChangePassword extends HttpServlet {
 				session.setAttribute("changePasswordError",
 						"Enter a new password.");
 				session.setAttribute("password", pass1);
-				
+
 			}
 			resp.sendRedirect("/endpoint/change-password-page");
 			return;
@@ -51,51 +51,19 @@ public class ChangePassword extends HttpServlet {
 			synchronized (session) {
 				session.setAttribute("changePasswordError",
 						"Retype your password.");
-			
-				
+
 			}
 			resp.sendRedirect("/endpoint/change-password-page");
 			return;
 
 		}
-		if (!Util.containsPattern(pass1, Util.AT_LEAST_ONE_DIGIT)) {
-			synchronized (session) {
-				session.setAttribute("changePasswordError",
-						"Your password should contain at least one digit.");
-			
-				
-			}
-			resp.sendRedirect("/endpoint/change-password-page");
-			return;
 
-		}
-		if (!Util.containsPattern(pass1, Util.AT_LEAST_ONE_LOWERCASE_ALPHABET)) {
+		if (!Util.containsPattern(pass1, Util.PASSWORD_PATTERN)) {
 			synchronized (session) {
-				session.setAttribute("changePasswordError",
-						"Your password should contain at least one lower case alphabet.");
-				resp.sendRedirect("/endpoint/change-password-page");
-				
-			}
-			return;
+				session.setAttribute(
+						"changePasswordError",
+						"Your password should contain at least one lower case and upper case alphabet, one digit, one special symbol out of '@ # $ %', and must have a minmum of 6and maximum of 20 characters");
 
-		}
-		if (!Util.containsPattern(pass1, Util.AT_LEAST_ONE_UPPERCASE_ALPHABET)) {
-			synchronized (session) {
-				session.setAttribute("changePasswordError",
-						"Your password should contain at least one upper case alphabet.");
-				
-				
-			}
-			resp.sendRedirect("/endpoint/change-password-page");
-			return;
-
-		}
-		if (!Util.containsPattern(pass1, Util.AT_LEAST_ONE_SYMBOL)) {
-			synchronized (session) {
-				session.setAttribute("changePasswordError",
-						"Your password should contain at least one symbol out of !, @, #, $, %");
-				
-				
 			}
 			resp.sendRedirect("/endpoint/change-password-page");
 			return;
@@ -105,33 +73,32 @@ public class ChangePassword extends HttpServlet {
 			synchronized (session) {
 				session.setAttribute("changePasswordError",
 						"The passwords do not match.");
-			
-				
+
 			}
 			resp.sendRedirect("/endpoint/change-password-page");
 			return;
 
 		}
-		
+
 		u.setPassword(Util.toSHA512(pass1));
-		
+
 		synchronized (session) {
 			session.setAttribute("user", u);
 			session.removeAttribute("password");
-			session.setAttribute("passwordChangeSuccess", "Your password has been changed. You can now sign in.");
+			session.setAttribute("passwordChangeSuccess",
+					"Your password has been changed. You can now sign in.");
 		}
-		
+
 		GeneralController.create(EntityConverter.userToEntity(u));
-		
+
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		resp.sendRedirect(resp.encodeRedirectURL("/sign-in"));
-		
 
 	}
 

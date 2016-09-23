@@ -37,9 +37,9 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 public class GetReadingList extends HttpServlet {
 
 	//change this again
-	private static final String ak = "";
-	private static final String ask = "";
-	private static final String ep = "";
+	private static final String ak = "AKIAJWQ3Z2P6ALOAAHDQ";
+	private static final String ask = "bmn2HQ52rXR+e2B0orFFLpdqDvP2x04R6guJWQBd";
+	private static final String ep = "webservices.amazon.com";
 
 	private static final long serialVersionUID = -1477727040955965118L;
 

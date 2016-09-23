@@ -105,16 +105,11 @@
 								</div>
 								<div class="card-list">
 
-									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">New Applicants:</a> <span class="pull-right"><c:out
-											value='${projectBean.newApplicants}' /></span>
-
-								</div>
-								<div class="card-list">
-
-									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">All Applicants:</a> <span class="pull-right"><c:out
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">Applicants:</a> <span class="pull-right"><c:out
 											value='${projectBean.totalApplicants}' /></span>
 
 								</div>
+								
 
 								<div class="card-list">
 

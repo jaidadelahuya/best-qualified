@@ -15,9 +15,38 @@
 <link rel="stylesheet" href="/styles/waitMe.css">
 <link rel="stylesheet" href="/styles/font-awesome.min.css">
 <link rel="stylesheet" href="/styles/comi.css">
-
 </head>
 <body style="background-color: #edeff5">
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<script>
+		window.twttr = (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+			if (d.getElementById(id))
+				return t;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
+
+			t._e = [];
+			t.ready = function(f) {
+				t._e.push(f);
+			};
+
+			return t;
+		}(document, "script", "twitter-wjs"));
+	</script>
 	<%@ include file="/main-nav.html"%>
 	<br>
 	<br>
@@ -29,12 +58,13 @@
 				<div class="card-panel" style="margin-bottom: 2%; width: 100%">
 					<h3 class="text-primary" style="text-align: center" id="lol">${currentArticle.title}</h3>
 					<div>
-						<img
-						class="media-object img-rounded" src="${currentArticle.pictureUrl}" style="width: 100%; margin: 0 auto">
+						<img class="media-object img-rounded"
+							src="${currentArticle.pictureUrl}"
+							style="width: 100%; margin: 0 auto">
 					</div>
-					
+
 					<div>
-						
+
 						<p
 							style="color: #983b59; font-family: calibri; letter-spacing: 3px; text-align: center; margin: 2%;">
 							<span style="margin-left: 5px;"><i class="fa fa-user"></i>
@@ -47,16 +77,32 @@
 								href='<c:url value="/community?id=${currentArticle.webkey}" />'></a></span>
 						</p>
 
-						<p id="socialo">
-							<span id="fb"> <a href=""><i
-									class="fa fa-facebook-square" aria-hidden="true"
-									style="color: #3b5998;"></i> Share</a></span> <span id="tw"><a
-								href=""><i class="fa fa-twitter-square" aria-hidden="true"
-									style="color: #00aced;"></i> Tweet</a></span> <span id="go"><a
-								href=""><i class="fa fa-google-plus-square"
-									aria-hidden="true" style="color: #F43222;"></i> Share</a></span>
+						<div class="row">
+							<div class="col-md-12" style="text-align: center; padding: 2%;">
+								<div class="fb-share-button"
+									style="line-height: 0.7; vertical-align: baseline; display: inline-block;"
+									data-href="/bq/open/job?job-key=${jobInformation.webKey}"
+									data-layout="button"></div>
 
-						</p>
+								<script src="//platform.linkedin.com/in.js"
+									type="text/javascript">
+									lang: en_US
+								</script>
+								<script type="IN/Share"
+									data-url="http://localhost:8888/bq/open/job?job-key=${jobInformation.webKey}"></script>
+								<div class="g-plus" data-action="share" data-annotation="none"
+									data-href="http://localhost:8888/bq/open/job?job-key=${jobInformation.webKey}"></div>
+								<a class="twitter-share-button"
+									href="https://twitter.com/intent/tweet"></a>
+								<div style="display: inline-block;">
+									<a
+										href="mailto:?Subject=Job recommendation from Best Qualified&amp;Body=Hello, Here%20is%20a%20job%20you%20may%20like%20${jobInformation.pageUrl}">
+										<img src="/images/email-big.png"
+										style="vertical-align: baseline;" alt="Email" />
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

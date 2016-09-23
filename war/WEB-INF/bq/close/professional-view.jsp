@@ -71,8 +71,8 @@
 				</div>
 
 				<div class="row" style="margin-top: 2%; margin-bottom: 2%;">
-					<c:forEach var="item" items="${recruiterDashboard.prospects}">
-						<div class="col-sm-3" style="margin-bottom: 2%;">
+					<c:forEach var="item" items="${recruiterDashboard.hotList}">
+						<div class="col-sm-2" style="margin-bottom: 2%;">
 							<input type="hidden" value="${item.webkey}" class="webkey">
 							<input type="hidden" value="${item.email}"
 								class="candidate-email">

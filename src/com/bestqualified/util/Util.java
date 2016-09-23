@@ -115,10 +115,8 @@ public class Util {
 	public static final String SERVICE_ACCOUNT = "bestqualified.profiliant@gmail.com";
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	public static final String AT_LEAST_ONE_DIGIT = ".*\\d+.*";
-	public static final String AT_LEAST_ONE_LOWERCASE_ALPHABET = "(?=.*[a-z])";
-	public static final String AT_LEAST_ONE_UPPERCASE_ALPHABET = "(?=.*[A-Z])";
-	public static final String AT_LEAST_ONE_SYMBOL = "(?=.*[!@#$%])";
+	public static final String PASSWORD_PATTERN =
+            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 
 	public synchronized static String getTransactionRef(String fName,
 			String lName) {

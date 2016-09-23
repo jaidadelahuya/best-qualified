@@ -61,7 +61,7 @@ public class LinkedInCallback extends HttpServlet {
 
 				if (state.equals(sstate)) {
 					String redirect = resp
-							.encodeRedirectURL("http://localhost:8888/bq/open/linkedin/callback");
+							.encodeRedirectURL("http://best-qualified.appspot.com/bq/open/linkedin/callback");
 					String payload = "grant_type=authorization_code&code="
 							+ code + "&redirect_uri=" + redirect
 							+ "&client_id=" + clientId + "&client_secret="
