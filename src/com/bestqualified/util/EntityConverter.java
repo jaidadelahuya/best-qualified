@@ -56,7 +56,7 @@ public class EntityConverter {
 		
 	}
 	
-	public static CoachRequest entityTpCoachRequest(Entity e) {
+	public static CoachRequest entityToCoachRequest(Entity e) {
 		CoachRequest cr = new CoachRequest();
 		cr.setUserKey((Key) e.getProperty("userKey"));
 		cr.setTxnRef((String) e.getProperty("txnRef"));
@@ -287,6 +287,10 @@ public class EntityConverter {
 	}
 
 	public static Award entityToAward(Entity e) {
+		if(e==null){
+			return null;
+		}
+		else{
 		Award a = new Award();
 		a.setMonth((String) e.getProperty("month"));
 		a.setYear((String) e.getProperty("year"));
@@ -294,6 +298,7 @@ public class EntityConverter {
 		a.setId(e.getKey());
 		a.setName((String) e.getProperty(StringConstants.NAME));
 		return a;
+		}
 	}
 
 	public static Entity careerLevelToEntity(CareerLevel cl) {
@@ -311,16 +316,21 @@ public class EntityConverter {
 	}
 
 	public static Entity certificationToEntity(Certification c) {
-		Entity e = new Entity(Certification.class.getSimpleName());
+		//Entity e = new Entity(Certification.class.getSimpleName());
+		Entity e = new Entity(c.getId());
 		e.setUnindexedProperty(StringConstants.NAME, c.getName());
-		e.setUnindexedProperty(StringConstants.DATE, c.getDate());
+		e.setUnindexedProperty("month", c.getMonth());
+		e.setUnindexedProperty("year", c.getYear());
+	
 		return e;
 	}
 
 	public static Certification entityToCertification(Entity e) {
 		Certification c = new Certification();
 		c.setId(e.getKey());
-		c.setDate((Date) e.getProperty(StringConstants.DATE));
+		c.setMonth((String) e.getProperty("month"));
+		c.setYear((String) e.getProperty("year"));
+		
 		c.setName((String) e.getProperty(StringConstants.NAME));
 		return c;
 
@@ -496,6 +506,7 @@ public class EntityConverter {
 				.getProperty(StringConstants.APPLICATION_URL));
 		j.setCompany((Key) e.getProperty(StringConstants.COMPANY));
 		j.setNewApplicants((List<Key>) e.getProperty("newApplicants"));
+		j.setSalaryRange((String) e.getProperty("salaryRange"));
 		return j;
 	}
 

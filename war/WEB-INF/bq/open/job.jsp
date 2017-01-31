@@ -45,7 +45,7 @@
 }
 </style>
 </head>
-<body>
+<body style="background-image: url(/images/background.jpg); background-repeat: repeat;">
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {
@@ -77,10 +77,9 @@
 		}(document, "script", "twitter-wjs"));
 	</script>
 	<%@ include file="/main-nav.html"%>
-	<div class="container dashboard-body hidden-xs hidden-sm"
-		style="height: 350px; padding: 3%; margin-bottom: 2%; border-bottom: 1px #cacaca solid; width: 100%; padding-top: 4%; padding-bottom: none; background-image: url('/images/concrete_seamless.png')"></div>
+	
 	<div class="container dashboard-body"
-		style="width: 80%; margin: 0 auto; margin-top: -300px; margin-bottom: 2%;">
+		style="width: 80%; margin: 0 auto;margin-bottom: 2%; margin-top: 6%">
 
 		<div class="row">
 			<div class="col-md-12" style="text-align: center; padding: 2%;">
@@ -113,8 +112,8 @@
 				style="margin-bottom: 2%; background-color: white; padding-top: 2%; border: 1px #cacaca solid">
 				<div class="col-sm-12 no-padding-div">
 					<div class="col-sm-12 no-padding-div"
-						style="background-color: rgba(255, 200, 45, 0.5)">
-						<div class="col-sm-3">
+						style="background-color: #e0c4cd; margin-bottom: 2%;">
+						<div class="col-sm-3" style="padding: 1%;">
 							<img alt="" src="${jobInformation.pictureUrl}"
 								class="img img-responsive">
 						</div>
@@ -152,7 +151,7 @@
 					<div class="col-sm-12">
 
 						<p>${jobInformation.jobDesc}</p>
-						<p>${jobInformation.extraInfo}</p>
+						<p>${jobInformation.jobRole}</p>
 						<p>
 							<button class="btn  btn-primary apply-button">Apply</button>
 							<c:if test="${not empty user }">
@@ -190,8 +189,8 @@
 		</div>
 		<div class="col-sm-4">
 			<div class="col-sm-12 discussion-sidebar"
-				style="background-color: rgba(57, 255, 20, 0.6)">
-				<h4 style="border-bottom: 1px gray solid">Job Summary</h4>
+				style="background-color: #69a24e; color: white">
+				<h4 style="border-bottom: 1px white solid; padding-bottom: 4px">Job Summary</h4>
 				<c:if test='${not empty jobInformation.companyName}'>
 					<strong style="display: block;">Company</strong>
 					<p>
@@ -200,7 +199,7 @@
 				</c:if>
 
 				<c:if test='${not empty jobInformation.careerLevel}'>
-					<strong style="display: block;">Job Level</strong>
+					<strong style="display: block;">Career Level</strong>
 					<p>
 						<c:out value='${jobInformation.careerLevel}' />
 					</p>
@@ -212,11 +211,7 @@
 						<c:out value='${jobInformation.location}' />
 					</p>
 				</c:if>
-				<c:if test='${not empty jobInformation.industry}'>
-					<strong style="display: block;">Industry</strong>
-					<p>
-						<c:out value='${jobInformation.industry}' />
-				</c:if>
+				
 
 				<c:if test='${not empty jobInformation.jobType}'>
 					<strong style="display: block;">Job Type</strong>
@@ -224,11 +219,18 @@
 						<c:out value='${jobInformation.jobType}' />
 					</p>
 				</c:if>
-
+				
 				<c:if test='${not empty jobInformation.qualification}'>
 					<strong style="display: block;">Mininum Qualification</strong>
 					<p>
 						<c:out value='${jobInformation.qualification}' />
+					</p>
+				</c:if>
+				
+				<c:if test='${not empty jobInformation.salaryRange}'>
+					<strong style="display: block;">Salary Range</strong>
+					<p>
+						<c:out value='${jobInformation.salaryRange}' />
 					</p>
 				</c:if>
 
@@ -250,9 +252,9 @@
 			</div>
 			<c:if test="${not empty jobInformation.relatedJobs}">
 				<div class="col-sm-12 dashboard-section no-padding-div"
-					style="border: 2px orange solid; padding-top: 0px; padding-bottom: 0px">
+					style="border: 2px #627aac solid; padding-top: 0px; padding-bottom: 0px">
 					<div class="col-sm-12 no-padding-div"
-						style="background-color: orange; color: white; font-weight: bold; text-align: center;">
+						style="background-color:#627aac; color: white; font-weight: bold; text-align: center;">
 						<h4>Related Jobs</h4>
 					</div>
 					<c:forEach var="item" items="${jobInformation.relatedJobs}">

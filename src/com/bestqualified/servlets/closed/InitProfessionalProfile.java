@@ -46,6 +46,7 @@ public class InitProfessionalProfile extends HttpServlet {
 		} else {
 			resp.getWriter().write("An error has occured");
 		}
+		//nothing to say
 		
 		
 	}

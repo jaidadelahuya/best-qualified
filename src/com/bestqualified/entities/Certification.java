@@ -3,7 +3,9 @@ package com.bestqualified.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.bestqualified.controllers.GeneralController;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 public class Certification implements Serializable {
 
@@ -13,12 +15,17 @@ public class Certification implements Serializable {
 	private static final long serialVersionUID = -7616426998113129499L;
 	
 	private Key id;
-	private String name;
-	private Date date;
+	private String name, month, year, webKey;
+	
+	public Certification() {
+		this.id = GeneralController.ds.allocateIds(Certification.class.getSimpleName(),
+				1).getStart();
+		this.webKey = KeyFactory.keyToString(id);
+	}
 	@Override
 	public String toString() {
-		return "Certification [id=" + id + ", name=" + name + ", date=" + date
-				+ "]";
+		return "Certification [id=" + id + ", name=" + name + ", month="
+				+ month + ", year=" + year + ", webKey=" + webKey + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -48,6 +55,7 @@ public class Certification implements Serializable {
 	}
 	public void setId(Key id) {
 		this.id = id;
+		this.webKey = KeyFactory.keyToString(id);
 	}
 	public String getName() {
 		return name;
@@ -55,12 +63,25 @@ public class Certification implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getDate() {
-		return date;
+	public String getMonth() {
+		return month;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setMonth(String month) {
+		this.month = month;
 	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getWebKey() {
+		return webKey;
+	}
+	public void setWebKey(String webKey) {
+		this.webKey = webKey;
+	}
+	
 	
 	
 

@@ -188,12 +188,12 @@
 				<h4>FROM OUR COMMUNITY</h4>
 				<c:forEach var="item" items="${indexBean.articles}">
 					<div class="media">
-						<a class="pull-left"
-							href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><img
+						<c:if test="${not empty item.pictureUrl }"><a class="pull-left"
+							href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><img
 							class="media-object img-rounded" src="${item.pictureUrl}"
-							width="130" height="130"></a>
+							width="130" height="130"></a></c:if>
 						<div class="media-body">
-							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><h3
+							<a href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><h3
 									class="media-heading" id="lol">${item.title}</h3></a>
 							<p
 								style="color: #983b59; font-family: calibri; letter-spacing: 3px">
@@ -204,19 +204,8 @@
 							</p>
 							<p>
 								${item.snippet}<span><a
-									href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><i
+									href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'>  <i
 										class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
-							</p>
-
-							<p id="socialo">
-								<span id="fb"> <a href=""><i
-										class="fa fa-facebook-square" aria-hidden="true"
-										style="color: #3b5998;"></i> Share</a></span> <span id="tw"><a
-									href=""><i class="fa fa-twitter-square" aria-hidden="true"
-										style="color: #00aced;"></i> Tweet</a></span> <span id="go"><a
-									href=""><i class="fa fa-google-plus-square"
-										aria-hidden="true" style="color: #F43222;"></i> Share</a></span>
-
 							</p>
 						</div>
 					</div>
@@ -320,11 +309,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
 
 	<br>
 	<br>

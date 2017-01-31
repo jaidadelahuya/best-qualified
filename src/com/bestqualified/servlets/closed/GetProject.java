@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bestqualified.bean.ProjectBean;
 import com.bestqualified.controllers.GeneralController;
@@ -35,7 +36,11 @@ public class GetProject extends HttpServlet {
 			if(e!=null) {
 				Project p = EntityConverter.entityToProject(e);
 				ProjectBean pb = Util.toFullProjectBean(p);
-				req.setAttribute("projectBean", pb);
+				HttpSession session = req.getSession();
+				synchronized (session) {
+					req.getSession().setAttribute("projectBean", pb);
+					session.removeAttribute("updateProjectError");
+				}
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/bq/close/project.jsp");
 				rd.include(req,resp);
 			} else {

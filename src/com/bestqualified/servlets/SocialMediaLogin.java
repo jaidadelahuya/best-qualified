@@ -49,10 +49,11 @@ public class SocialMediaLogin extends HttpServlet {
 				if (Util.notNull(su.getPictureUrl())) {
 					u.setPictureUrl(su.getPictureUrl());
 				}
+				u.setVerified(true);
 				switch (su.getNetwork()) {
 				case FACEBOOK:
 					u.setFacebookID(su.getId());
-
+					
 					break;
 				case LINKEDIN:
 					u.setLinkedInID(su.getId());
@@ -65,8 +66,11 @@ public class SocialMediaLogin extends HttpServlet {
 				}
 			}else {
 				u = Util.socialUserToUser(su);
+				u.setVerified(true);
 				
 			}	
+		}else {
+			u.setVerified(true);
 		}
 		
 		synchronized (session) {

@@ -44,6 +44,7 @@ import com.bestqualified.bean.AssessmentQuestionBean;
 import com.bestqualified.bean.CommunityBean;
 import com.bestqualified.bean.CorrectionBean;
 import com.bestqualified.bean.FacebookAccessTokenResponse;
+import com.bestqualified.bean.FullJobBean;
 import com.bestqualified.bean.InterestedJob;
 import com.bestqualified.bean.LinkedInAccessTokenResponse;
 import com.bestqualified.bean.ManageProjectBean;
@@ -114,10 +115,8 @@ public class Util {
 	public static final String SERVICE_ACCOUNT = "bestqualified.profiliant@gmail.com";
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	public static final String AT_LEAST_ONE_DIGIT = "((?=.*\\d))";
-	public static final String AT_LEAST_ONE_LOWERCASE_ALPHABET = "(?=.*[a-z])";
-	public static final String AT_LEAST_ONE_UPPERCASE_ALPHABET = "(?=.*[A-Z])";
-	public static final String AT_LEAST_ONE_SYMBOL = "(?=.*[!@#$%])";
+	public static final String PASSWORD_PATTERN =
+            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 
 	public synchronized static String getTransactionRef(String fName,
 			String lName) {
@@ -337,63 +336,77 @@ public class Util {
 	}
 
 	public static String getPostedTime(Date datePosted) {
+
 		Date today = new Date();
 		long difference = today.getTime() - datePosted.getTime();
+
+		// to seconds
 		difference = TimeUnit.MILLISECONDS.toSeconds(difference);
 		if (difference < 60) {
 			return difference + " seconds ago";
-		} else {
-			difference = TimeUnit.SECONDS.toMinutes(difference);
-			if (difference < 60) {
-				if (difference <= 1) {
-					return 1 + " minute ago";
-				} else {
-					return difference + " minutes ago";
-				}
-			} else {
-				difference = TimeUnit.MINUTES.toHours(difference);
-				if (difference < 24) {
-					if (difference <= 1) {
-						return 1 + " hour ago";
-					} else {
-						return difference + " hours ago";
-					}
-				} else if (difference < 48) {
-					return "yesterday";
-				} else {
-					difference = TimeUnit.HOURS.toDays(difference);
-					if (difference < 7) {
-						if (difference <= 1) {
-							return 1 + " day ago";
-						} else {
-							return difference + " days ago";
-						}
-					} else {
-						difference = Math.round(difference / 7);
-						if (difference < 5) {
-							if (difference <= 1) {
-								return 1 + " week ago";
-							} else {
-								return difference + " weeks ago";
-							}
-						} else {
-							difference = Math.round(difference / 30);
-							if (difference < 13) {
-								if (difference <= 1) {
-									return 1 + " year ago";
-								} else {
-									return difference + " years ago";
-								}
-							} else {
-								return Math.round(difference / 355)
-										+ " days(s) ago";
-							}
+		}
 
-						}
-					}
-				}
+		// to minutes
+		difference = TimeUnit.SECONDS.toMinutes(difference);
+		if (difference < 60) {
+			if (difference <= 1) {
+				return 1 + " minute ago";
+			} else {
+				return difference + " minutes ago";
 			}
 		}
+
+		// to hours
+		difference = TimeUnit.MINUTES.toHours(difference);
+		if (difference < 24) {
+			if (difference <= 1) {
+				return 1 + " hour ago";
+			} else {
+				return difference + " hours ago";
+			}
+		} else if (difference < 48) {
+			return "yesterday";
+		}
+
+		// to days
+		difference = TimeUnit.HOURS.toDays(difference);
+		if (difference < 7) {
+			if (difference <= 1) {
+				return 1 + " day ago";
+			} else {
+				return difference + " days ago";
+			}
+		}
+
+		// to Weeks
+		difference = Math.round(difference / 7);
+		if (difference < 5) {
+			if (difference <= 1) {
+				return 1 + " week ago";
+			} else {
+				return difference + " weeks ago";
+			}
+		}
+
+		// to months
+		difference = Math.round(difference / 4);
+		if (difference < 12) {
+			if (difference <= 1) {
+				return 1 + " month ago";
+			} else {
+				return difference + " months ago";
+			}
+		}
+
+		// to years
+		difference = Math.round(difference / 12);
+
+		if (difference <= 1) {
+			return 1 + " year ago";
+		} else {
+			return difference + " years ago";
+		}
+
 	}
 
 	public static String getPictureUrl(BlobKey key) {
@@ -896,8 +909,11 @@ public class Util {
 		List<Award> awards = new ArrayList<>();
 		if (cp.getAwards() != null) {
 			for (Key k : cp.getAwards()) {
-				awards.add(EntityConverter.entityToAward(GeneralController
-						.findByKey(k)));
+				Entity e = GeneralController.findByKey(k);
+				if (e != null) {
+					awards.add(EntityConverter.entityToAward(e));
+				}
+
 			}
 		} else {
 			cp.setAwards(new ArrayList<Key>());
@@ -908,8 +924,12 @@ public class Util {
 		if (cp.getCertifications() != null) {
 
 			for (Key k : cp.getCertifications()) {
-				certifications.add(EntityConverter
-						.entityToCertification(GeneralController.findByKey(k)));
+				Entity e = GeneralController.findByKey(k);
+				if (e != null) {
+					certifications
+							.add(EntityConverter.entityToCertification(e));
+				}
+
 			}
 		} else {
 			cp.setCertifications(new ArrayList<Key>());
@@ -920,8 +940,10 @@ public class Util {
 		List<Education> education = new ArrayList<>();
 		if (cp.getEducation() != null) {
 			for (Key k : cp.getEducation()) {
-				education.add(EntityConverter
-						.entityToEducation(GeneralController.findByKey(k)));
+				Entity e = GeneralController.findByKey(k);
+				if (e != null) {
+					education.add(EntityConverter.entityToEducation(e));
+				}
 			}
 		} else {
 			cp.setEducation(new ArrayList<Key>());
@@ -931,10 +953,12 @@ public class Util {
 		List<WorkExperience> workExperience = new ArrayList<>();
 		if (cp.getWorkExperience() != null) {
 			for (Key k : cp.getWorkExperience()) {
-				workExperience
-						.add(EntityConverter
-								.entityToWorkExperience(GeneralController
-										.findByKey(k)));
+				Entity e = GeneralController.findByKey(k);
+				if (e != null) {
+					workExperience.add(EntityConverter
+							.entityToWorkExperience(e));
+				}
+
 			}
 		} else {
 			cp.setWorkExperience(new ArrayList<Key>());
@@ -971,6 +995,8 @@ public class Util {
 		rdb.setName(u.getFirstName() + " " + u.getLastName());
 		if (u.getPictureUrl() == null) {
 			rdb.setImageUrl("/images/unknown-user.jpg");
+		} else {
+			rdb.setImageUrl(u.getPictureUrl());
 		}
 
 		if (r.getCompany() != null) {
@@ -1077,7 +1103,7 @@ public class Util {
 			pv.setEmail(sd.getOnlyField("email").getAtom());
 			pv.setFirstName(sd.getOnlyField("firstName").getText());
 			pv.setLastName(sd.getOnlyField("lastName").getText());
-			// pv.setPictureUrl(sd.getOnlyField("pictureUrl").getAtom());
+			pv.setPictureUrl(sd.getOnlyField("pictureUrl").getAtom());
 			pv.setYearsOfExperience(sd.getOnlyField("yearsOfExperience")
 					.getAtom());
 			pv.setHighestQualification(sd.getOnlyField("highestEducationLevel")
@@ -1143,8 +1169,7 @@ public class Util {
 	public static ProjectBean toProjectBean(Project project) {
 		ProjectBean pb = new ProjectBean();
 		pb.setName(project.getName());
-		pb.setDateCreated(new SimpleDateFormat("yyyy MMM dd").format(project
-				.getDateCreated()));
+		pb.setDateCreated(project.getDateCreated());
 		if (project.getDescription() != null) {
 			pb.setDescription(project.getDescription().getValue());
 		}
@@ -1157,14 +1182,21 @@ public class Util {
 		if (project.getApplicants() != null) {
 			pb.setTotalApplicants(project.getApplicants().size());
 		}
+		
+		if(project.getShortListedCandidates() != null) {
+			pb.setShortListed(project.getShortListedCandidates().size());
+		}
+		
+		if(project.getSavedSearch() != null) {
+			pb.setSavedSearchNo(project.getSavedSearch().size());
+		}
 
 		pb.setWebKey(project.getSafeKey());
 		if (project.getJobs() != null) {
 			Job j = EntityConverter.entityToJob(GeneralController
 					.findByKey(project.getJobs()));
 			pb.setJobTitle(j.getJobTitle());
-			pb.setExpiryDate(new SimpleDateFormat("yyyy MMM dd").format(j
-					.getClosingDate()));
+			pb.setExpiryDate(j.getClosingDate());
 			if (j.getCompany() != null) {
 				Company c = EntityConverter.entityToCompany(GeneralController
 						.findByKey(j.getCompany()));
@@ -1295,8 +1327,7 @@ public class Util {
 		List<ProjectBean> pb1 = new ArrayList<>();
 		for (Project p : l1) {
 			ProjectBean pb = new ProjectBean();
-			pb.setDateCreated(new SimpleDateFormat("dd-MMM-yyyy").format(p
-					.getDateCreated()));
+			pb.setDateCreated(p.getDateCreated());
 			pb.setDescription(p.getDescription().getValue());
 			pb.setName(p.getName());
 			if (p.getProfiles() == null) {
@@ -2016,7 +2047,7 @@ public class Util {
 				int end = str.indexOf(" ", 300);
 				a.setSnippet(str.substring(0, end));
 				a.setRemainingSnippet(str.substring(end));
-				
+
 			} else {
 				a.setSnippet(art.getBody().getValue());
 			}
@@ -2201,20 +2232,31 @@ public class Util {
 	public static ProjectBean toFullProjectBean(Project project) {
 		ProjectBean pb = new ProjectBean();
 		pb.setName(project.getName());
-		pb.setDateCreated(new SimpleDateFormat("yyyy MMM dd").format(project
-				.getDateCreated()));
+		pb.setDateCreated(project.getDateCreated());
 		if (project.getDescription() != null) {
 			pb.setDescription(project.getDescription().getValue());
 		}
-		
 
+		if (project.getInvitees() != null) {
+			pb.setInviteSent(project.getInvitees().size());
+		}
+		if (project.getNewApplicants() != null) {
+			pb.setNewApplicants(project.getNewApplicants().size());
+		}
+		if (project.getApplicants() != null) {
+			pb.setTotalApplicants(project.getApplicants().size());
+		}
+
+		if (project.getShortListedCandidates() != null) {
+			pb.setShortListed(project.getShortListedCandidates().size());
+		}
 		pb.setWebKey(project.getSafeKey());
 		if (project.getJobs() != null) {
 			Job j = EntityConverter.entityToJob(GeneralController
 					.findByKey(project.getJobs()));
-			pb.setJobTitle(j.getJobTitle());
-			pb.setExpiryDate(new SimpleDateFormat("yyyy MMM dd").format(j
-					.getClosingDate()));
+			FullJobBean fjb = toFullJobBean(j);
+			pb.setExpiryDate(j.getClosingDate());
+			pb.setJob(fjb);
 			if (j.getCompany() != null) {
 				Company c = EntityConverter.entityToCompany(GeneralController
 						.findByKey(j.getCompany()));
@@ -2223,10 +2265,56 @@ public class Util {
 				} else {
 					pb.setCompanyLogo(Util.getPictureUrl(c.getLogo()));
 				}
+
+				pb.setCompanyDesc((c.getDescription() != null) ? c
+						.getDescription().getValue() : "");
+
+				pb.setCompanyName(c.getCompanyName());
+				pb.setCompanyWebsite(c.getCompanyWebsite());
+
 			}
 		}
 		return pb;
-	
+
+	}
+
+	public static FullJobBean toFullJobBean(Job j) {
+		FullJobBean fjb = new FullJobBean();
+		fjb.setApplicationDeadline(new SimpleDateFormat("MM/dd/YYYY").format(j
+				.getClosingDate()));
+
+		fjb.setApplyWithLinkedIn(j.isAllowLinkedInApplication());
+		fjb.setCareerLevel(Util.getCareerLevelValue(j.getCareerLevel()));
+		fjb.setEducationLevel(Util.getEducationLevelValue(j.getEducationLevel()));
+		fjb.setJobDesc(j.getDescription().getValue());
+		fjb.setJobRole(j.getJobRoles().getValue());
+		fjb.setJobType(getJobTypeValue(j.getJobType()));
+		fjb.setLocation(j.getLocation());
+		fjb.setSalaryRange(getSalaryValue(j.getSalaryRange()));
+		fjb.setSkills("");
+		fjb.setApplicationUrl(j.getApplicationUrl());
+		fjb.setTitle(j.getJobTitle());
+		fjb.setYearsOfExperience(Util.getExperienceValue(j.getExperience()));
+
+		return fjb;
+	}
+
+	public static ProView toProView(Key k) {
+		Entity e = GeneralController.findByKey(k);
+		ProView pv = null;
+		if(e!=null) {
+			User u = EntityConverter.entityToUser(e);
+			pv = new ProView();
+			pv.setEmail(u.getEmail());
+			pv.setFirstName(u.getFirstName());
+			pv.setLastName(u.getLastName());
+			pv.setPictureUrl(u.getPictureUrl());
+			pv.setWebkey(KeyFactory.keyToString(u.getUserKey()));
+			CandidateProfile cp = EntityConverter.entityToCandidateProfile(GeneralController.findByKey(u.getUserKey()), u.getUserKey());
+			pv.setHighestQualification(cp.getHighestEducationLevel());
+			pv.setYearsOfExperience(cp.getYearsOfExperience());
+		}
+		return pv;
 	}
 
 }

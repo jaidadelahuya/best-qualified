@@ -110,8 +110,8 @@ public class UpdateWorkExperience extends HttpServlet {
 				+ endMonth
 				+ " "
 				+ endYear + "</span></h5><a>Delete</a></div>";
-		resp.setContentType("application/json");
-		resp.getWriter().write(new Gson().toJson(data));
+		//resp.setContentType("application/json");
+		//resp.getWriter().write(new Gson().toJson(data));
 
 	}
 

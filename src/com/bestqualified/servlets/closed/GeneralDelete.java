@@ -13,8 +13,10 @@ import com.bestqualified.bean.ProfessionalProfileBean;
 import com.bestqualified.controllers.GeneralController;
 import com.bestqualified.entities.Award;
 import com.bestqualified.entities.CandidateProfile;
+import com.bestqualified.entities.Certification;
 import com.bestqualified.entities.Education;
 import com.bestqualified.entities.WorkExperience;
+import com.bestqualified.util.Util;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
@@ -26,12 +28,12 @@ public class GeneralDelete extends HttpServlet {
 	private static final long serialVersionUID = 4360486803462060930L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String safeKey = req.getParameter("key");
+		String safeKey = req.getParameter("id");
 		String item = req.getParameter("item");
 		Key key = null;
-		if (safeKey != null) {
+		if (Util.notNull(safeKey)) {
 			key = KeyFactory.stringToKey(safeKey);
 			GeneralController.delete(key);
 		}
@@ -78,7 +80,7 @@ public class GeneralDelete extends HttpServlet {
 
 					List<Award> l = ppb.getAwards();
 					for (Award e : l) {
-						if (e.getId().equals(key)) {
+						if (e!=null && e.getId().equals(key)) {
 							l.remove(e);
 							cp.getAwards().remove(e.getId());
 							break;
@@ -87,6 +89,20 @@ public class GeneralDelete extends HttpServlet {
 					ppb.setAwards(l);
 				}
 				break;
+				
+			case "certification":
+				synchronized (session) {
+
+					List<Certification> cert = ppb.getCertifications();
+					for (Certification e : cert) {
+						if (e.getId().equals(key)) {
+							cert.remove(e);
+							cp.getCertifications().remove(e.getId());
+							break;
+						}
+					}
+					ppb.setCertifications(cert);
+				}
 			default:
 				break;
 			}

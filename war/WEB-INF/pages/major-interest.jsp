@@ -183,16 +183,7 @@ p,div {
 												required="required">
 												<option value="" disabled selected hidden>* Career
 													Level</option>
-												<option value="101">Student
-													(Undergraduate/Graduate)</option>
-												<option value="102">Entry Level</option>
-												<option value="103">Experienced (Non-Managerial)</option>
-												<option value="104">Manager (Manager/Supervisor of
-													Staff)</option>
-												<option value="105">Executive (SVP,VP,Department
-													Head etc)</option>
-												<option value="106">Senoir Executive (President,
-													CFO. etc)</option>
+												<%@ include file='/partial/career-level.html' %>
 											</select>
 										</div>
 									</div>
@@ -203,12 +194,7 @@ p,div {
 												name="educational-level">
 												<option value="" disabled selected hidden>* Highest
 													Education Level</option>
-												<option value="501">Higher National Diploma</option>
-												<option value="502">Bachelor's Degree</option>
-												<option value="503">Master's Degree</option>
-												<option value="504">Post Graduate Diploma</option>
-												<option value="505">Doctorate</option>
-												<option value="506">Professional</option>
+												<%@ include file='/partial/education.html' %>
 											</select>
 										</div>
 										<div class="form-group col-sm-6">
@@ -216,12 +202,7 @@ p,div {
 												name="job-type">
 												<option value="" disabled selected hidden>* Job
 													Type</option>
-												<option value="301">Freelance</option>
-												<option value="302">Full Time</option>
-												<option value="303">Internship</option>
-												<option value="304">Part Time</option>
-												<option value="305">Permanent</option>
-												<option value="306">Temporary</option>
+												<%@ include file='/partial/job-type.html' %>
 											</select>
 										</div>
 									</div>
@@ -232,43 +213,7 @@ p,div {
 												name="location">
 												<option value="" disabled selected hidden>* Your
 													Location</option>
-												<option>Abia</option>
-												<option>Abuja</option>
-												<option>Adamawa</option>
-												<option>Anambra</option>
-												<option>Akwa Ibom</option>
-												<option>Bauchi</option>
-												<option>Bayelsa</option>
-												<option>Benue</option>
-												<option>Borno</option>
-												<option>Cross River</option>
-												<option>Delta</option>
-												<option>Ebonyi</option>
-												<option>Enugu</option>
-												<option>Edo</option>
-												<option>Ekiti</option>
-												<option>Gombe</option>
-												<option>Imo</option>
-												<option>Jigawa</option>
-												<option>Kaduna</option>
-												<option>Kano</option>
-												<option>Katsina</option>
-												<option>Kebbi</option>
-												<option>Kogi</option>
-												<option>Kwara</option>
-												<option>Lagos</option>
-												<option>Nasarawa</option>
-												<option>Niger</option>
-												<option>Ogun</option>
-												<option>Ondo</option>
-												<option>Osun</option>
-												<option>Oyo</option>
-												<option>Plateau</option>
-												<option>Rivers</option>
-												<option>Sokoto</option>
-												<option>Taraba</option>
-												<option>Yobe</option>
-												<option>Zamfara</option>
+												<%@ include file='/partial/states.html' %>
 											</select>
 										</div>
 										<input type="hidden" name="user-type" value="PROFESSIONAL" />
@@ -276,11 +221,7 @@ p,div {
 											<select class="form-control" name="salary"
 												required="required">
 												<option value="" disabled selected hidden>* Salary</option>
-												<option value="201">10,000 - 50,000</option>
-												<option value="202">50,000 - 100,000</option>
-												<option value="203">100,000 - 300,000</option>
-												<option value="204">300,000 - 500,000</option>
-												<option value="205">Unspecified</option>
+												<%@ include file='/partial/salary-range.html' %>
 											</select>
 										</div>
 

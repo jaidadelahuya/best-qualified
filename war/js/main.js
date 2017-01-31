@@ -53,11 +53,10 @@ $(document).ready(function() {
 			});
 	
 	
-	$("#project-trig").click(function() {
-		$("#create-project-div").slideDown("slow");
-	});
+	
 	
 	$("#discussion-trig").click(function() {
+		$(".article-div").hide();
 		$(".discussion-div").slideDown("slow");
 	});
 	$("#close-discussion").click(function() {
@@ -65,6 +64,7 @@ $(document).ready(function() {
 	});
 	
 	$("#article-trig").click(function() {
+		$(".discussion-div").hide();
 		$(".article-div").slideDown("slow");
 	});
 	$("#close-article").click(function() {

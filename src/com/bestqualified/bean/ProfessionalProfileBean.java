@@ -29,7 +29,6 @@ public class ProfessionalProfileBean implements Serializable {
 	private List<Certification> certifications;
 
 
-
 	public String getWebKey() {
 		return webKey;
 	}

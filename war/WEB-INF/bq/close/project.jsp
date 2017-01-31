@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,215 +26,205 @@
 }
 </style>
 </head>
-<body
+<body <jsp:useBean id="today" class="java.util.Date" />
 	style="background-image: url(/images/background.jpg); background-repeat: repeat;">
 	<%@ include file="/main-nav.html"%>
 	<div class="container dashboard-body" style="margin-top: 6%;">
-		<div class="col-sm-7">
+		<div class="col-sm-8">
 			<div class="card-panel">
-				<h3 style="color: #3b5998"><c:out value='${projectBean.name}'/></h3>
-				<h5 style="color:#983b59; width: 50%;"><strong>Created: </strong><c:out value='${projectBean.dateCreated}'/></h5>
-				<h5 style="color:#59983b; width: 50%;"><strong>Expiry: </strong><c:out value='${projectBean.expiryDate}'/></h5>
-				<p><c:out value='${projectBean.description}'/></p>
-			</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 style="color: #3b5998">
+							<strong><c:out value='${projectBean.name}' /> <small
+								class="pull-right" style="color: #983b59"><b>Created:</b>
+									<fmt:formatDate type="date" dateStyle="long"
+										value="${projectBean.dateCreated}" /> </small></strong>
+						</h4>
+						<c:if test='${not empty projectBean.description}'>
+							<h5 style="color: #987a3b">Description</h5>
+							<p style="font-family: calibri">
+								<c:out value='${projectBean.description}' />
+							</p>
+						</c:if>
 
-			<div class="card-panel">
-				<div id="create-job-div" class="section" >
-					<input type="hidden" value="3" class="step">
-					<form action="<c:url value='/endpoint/init-recruiter-mj3' />">
-						<div class="row">
-							<div class="form-group col-sm-12">
+					</div>
+
+
+				</div>
+				<div class="row">
+					<div class="col-sm-12 no-padding-div"
+						style="background-color: #e0c4cd">
+						<div class="col-sm-3" style="padding: 1%;">
+							<img alt=""
+								<c:choose><c:when test='${not empty projectBean.companyLogo }'>src="${projectBean.companyLogo}"</c:when><c:otherwise>src='/images/company.png'</c:otherwise></c:choose>
+								class="img img-responsive">
+						</div>
+						<div class="col-sm-4">
+							<h4 style="color: #3b5998">
+								<c:out value="${projectBean.job.title}" />
+							</h4>
+							<h5 style="font-family: calibri">
+								<c:choose>
+									<c:when test='${not empty projectBean.companyName }'>
+										<c:out value="${projectBean.companyName}" />
+									</c:when>
+									<c:otherwise>Confidential</c:otherwise>
+								</c:choose>
+							</h5>
+							<c:if test="${not empty projectBean.expiryDate}"><h5>
+								<i class="text-danger" style="font-family: calibri"> <c:choose>
+										<c:when test="${today gt projectBean.expiryDate}">
+											<span style="color: red; font-weight: bold">Expired</span>
+										</c:when>
+										<c:otherwise>
+											<span style="color: green; font-weight: bold">Expires</span>
+										</c:otherwise>
+									</c:choose> <span style="color: white"><fmt:formatDate type="date"
+											dateStyle="long" value="${projectBean.expiryDate}" /></span>
+								</i>
+							</h5></c:if>
+							<p>
+								<a href="<c:url value='/bq/close/recruiter/project/edit' />"
+									class="btn btn-success btn-lg">Update</a>
+							</p>
+						</div>
+						<div class="col-sm-5" style="padding: 1%;">
+							<div class="card-panel"
+								style="background-color: #ebeef4; color: #983b59">
+								<div class="card-list">
+
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=short-list' />">Short Listed:</a> <span class="pull-right"><c:out
+											value='${projectBean.shortListed}' /></span>
+
+								</div>
+								<div class="card-list">
+
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=invitees' />">Invited:</a> <span class="pull-right"><c:out
+											value='${projectBean.inviteSent}' /></span>
+
+								</div>
+								<div class="card-list">
+
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=applicants' />">Applicants:</a> <span class="pull-right"><c:out
+											value='${projectBean.totalApplicants}' /></span>
+
+								</div>
 								
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<div class="msg-div"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
-								<input class="form-control" name="job-title"
-									placeholder="* Job Title" required="required" />
-							</div>
-							<div class="form-group col-sm-6">
-								<select class="form-control" required="required"
-									name="job-location">
-									<option value="" disabled selected hidden>* Job
-										Location</option>
-									<option>Abia</option>
-									<option>Abuja</option>
-									<option>Adamawa</option>
-									<option>Anambra</option>
-									<option>Akwa Ibom</option>
-									<option>Bauchi</option>
-									<option>Bayelsa</option>
-									<option>Benue</option>
-									<option>Borno</option>
-									<option>Cross River</option>
-									<option>Delta</option>
-									<option>Ebonyi</option>
-									<option>Enugu</option>
-									<option>Edo</option>
-									<option>Ekiti</option>
-									<option>Gombe</option>
-									<option>Imo</option>
-									<option>Jigawa</option>
-									<option>Kaduna</option>
-									<option>Kano</option>
-									<option>Katsina</option>
-									<option>Kebbi</option>
-									<option>Kogi</option>
-									<option>Kwara</option>
-									<option>Lagos</option>
-									<option>Nasarawa</option>
-									<option>Niger</option>
-									<option>Ogun</option>
-									<option>Ondo</option>
-									<option>Osun</option>
-									<option>Oyo</option>
-									<option>Plateau</option>
-									<option>Rivers</option>
-									<option>Sokoto</option>
-									<option>Taraba</option>
-									<option>Yobe</option>
-									<option>Zamfara</option>
-								</select>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
-								<input class="form-control" name="application-url"
-									placeholder="* Application URL/ Email" required="required" />
-							</div>
-							<div class="form-group col-sm-6">
-								<input class="form-control datepicker"
-									name="application-deadline" required="required"
-									placeholder="* Application Deadline" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<textarea rows="4" class="form-control" required="required"
-									style="white-space: pre-wrap" name="job-role"
-									placeholder="* Job Role/Responsibilities"></textarea>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<textarea rows="4" class="form-control" required="required"
-									style="white-space: pre-wrap" name="job-description"
-									placeholder="* Job Description"></textarea>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
-								<select class="form-control" name="career-level"
-									required="required">
-									<option value="" disabled selected hidden>* Career
-										Level</option>
-									<option value="101">Student (Undergraduate/Graduate)</option>
-									<option value="102">Entry Level</option>
-									<option value="103">Experienced (Non-Managerial)</option>
-									<option value="104">Manager (Manager/Supervisor of
-										Staff)</option>
-									<option value="105">Executive (SVP,VP,Department Head
-										etc)</option>
-									<option value="106">Senoir Executive (President, CFO.
-										etc)</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-6">
-								<select required="required" class="form-control"
-									name="education-level">
-									<option value="" disabled selected hidden>* Education
-										Level</option>
-									<option value="501">Higher National Diploma</option>
-									<option value="502">Bachelor's Degree</option>
-									<option value="503">Master's Degree</option>
-									<option value="504">Post Graduate Diploma</option>
-									<option value="505">Doctorate</option>
-									<option value="506">Professional</option>
-								</select>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
-								<select class="form-control" required="required" name="job-type">
-									<option value="" disabled selected hidden>* Job Type</option>
-									<option value="301">Freelance</option>
-									<option value="302">Full Time</option>
-									<option value="303">Internship</option>
-									<option value="304">Part Time</option>
-									<option value="305">Permanent</option>
-									<option value="306">Temporary</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-6">
-								<select class="form-control" name="salary">
-									<option value="" disabled selected hidden>Salary Range</option>
-									<option value="201">10,000 - 50,000</option>
-									<option value="202">50,000 - 100,000</option>
-									<option value="203">100,000 - 300,000</option>
-									<option value="204">300,000 - 500,000</option>
-									<option value="205">Unspecified</option>
-								</select>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
-								<select class="form-control" name="experience">
-									<option value="" disabled selected hidden>Years of
-										Experience</option>
-									<option value="401">0 - 1 year</option>
-									<option value="402">0 - 2 years</option>
-									<option value="403">1 - 3 years</option>
-									<option value="404">2 - 5 years</option>
-									<option value="405">3 - 5 years</option>
-									<option value="406">5 - 10 years</option>
-									<option value="407">7 - 10 years</option>
-									<option value="408">More than 10 years</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-6">
-								<div class="checkbox">
-									<label
-										style="font-style: italic; color: #777; font-family: calibri; font-size: 10pt"><input
-										type="checkbox" value="true" name="allow-linkedIn">Applicants
-										can apply with their LinkedIn profile?</label>
+
+								<div class="card-list">
+
+									<a href="<c:url value='/bq/close/professional/category?pid=${projectBean.webKey}&category=saved-search' />">Saved Search:</a> <span class="pull-right"><c:out
+											value='${projectBean.savedSearchNo}' /></span>
+
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<input class="form-control" name="skills" placeholder="Skills" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<textarea rows="4" class="form-control" name="extra-info"
-									style="white-space: pre-wrap"
-									placeholder="Additional Information"></textarea>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
-								<input type="button" value="Continue"
-									class="btn btn-primary mj-butt"> <a
-									class="btn btn-warning"
-									href="<c:url value='/bq/endpoint/recruit-professional-user' />">I
-									will do this later</a>
-							</div>
-						</div>
-					</form>
-
+					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<c:if test="${not empty projectBean.job.jobDesc}">
+							<h4 style="color: #983b59; font-weight: bold;">Job
+								Description</h4>
+						</c:if>
+						<p>${projectBean.job.jobDesc}</p>
+						<c:if test="${not empty projectBean.job.jobDesc}">
+							<h4 style="color: #983b59; font-weight: bold;">Job Role</h4>
+						</c:if>
+						<p>${projectBean.job.jobRole}</p>
+
+					</div>
+				</div>
+
+
+
 			</div>
+
 		</div>
-		<div class="col-sm-5"></div>
+		<div class="col-sm-4">
+			<div class="card-panel"
+				style="background-color: #69a24e; color: white">
+				<h4 style="border-bottom: 1px #bcd5b0 solid; padding-bottom: 4px">Job
+					Summary</h4>
+				<strong style="display: block;">Company</strong>
+				<c:choose>
+					<c:when test='${not empty projectBean.companyName }'>
+						<p>
+							<c:out value="${projectBean.companyName}" />
+						</p>
+					</c:when>
+					<c:otherwise>
+						<p>Confidential</p>
+					</c:otherwise>
+				</c:choose>
+
+				<c:if test='${not empty projectBean.job.careerLevel}'>
+					<strong style="display: block;">Job Level</strong>
+					<p>
+						<c:out value='${projectBean.job.careerLevel}' />
+					</p>
+				</c:if>
+
+				<c:if test='${not empty projectBean.job.location}'>
+					<strong style="display: block;">Location</strong>
+					<p>
+						<c:out value='${projectBean.job.location}' />
+					</p>
+				</c:if>
+
+
+				<c:if test='${not empty projectBean.job.jobType}'>
+					<strong style="display: block;">Job Type</strong>
+					<p>
+						<c:out value='${projectBean.job.jobType}' />
+					</p>
+				</c:if>
+
+				<c:if test='${not empty projectBean.job.educationLevel}'>
+					<strong style="display: block;">Mininum Qualification</strong>
+					<p>
+						<c:out value='${projectBean.job.educationLevel}' />
+					</p>
+				</c:if>
+
+				<c:if test='${not empty projectBean.job.salaryRange}'>
+					<strong style="display: block;">Salary Range</strong>
+					<p>
+						<c:out value='${projectBean.job.salaryRange}' />
+					</p>
+				</c:if>
+
+				<c:if test='${not empty projectBean.job.yearsOfExperience}'>
+					<strong style="display: block;">Prefered Years of
+						Experience</strong>
+					<p>
+						<c:out value='${projectBean.job.yearsOfExperience}' />
+					</p>
+				</c:if>
+
+				<c:if test='${not empty projectBean.expiryDate}'>
+					<strong style="display: block;">Application Deadline</strong>
+					<p>
+						<fmt:formatDate type="date" dateStyle="long"
+							value="${projectBean.expiryDate}" />
+					</p>
+				</c:if>
+
+			</div>
+
+			<c:if test="${not empty projectBean.companyName}">
+				<div class="card-panel"
+					style="background-color: #758ab6; color: white">
+					<h4 style="">Company Information</h4>
+					<p>${projectBean.companyName}</p>
+					<p>${projectBean.companyWebsite}</p>
+					<p>${projectBean.companyDesc}</p>
+				</div>
+			</c:if>
+
+		</div>
+
 	</div>
-
-
 	<%@ include file="/WEB-INF/pages/footer.html"%>
 	<script src="/js/jquery-1.11.2.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -244,3 +235,4 @@
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
 </body>
+</html>

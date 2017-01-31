@@ -44,7 +44,7 @@ public class FacebookCallback extends HttpServlet {
 			String clientSecret = getServletContext().getInitParameter(
 					"FacebookClientSecret");
 			String redirect = resp
-					.encodeRedirectURL("http://localhost:8888/bq/open/facebook/callback");
+					.encodeRedirectURL("http://best-qualified.appspot.com/bq/open/facebook/callback");
 			HttpSession session = req.getSession();
 			Object o = null;
 			String sstate = null;
@@ -92,6 +92,7 @@ public class FacebookCallback extends HttpServlet {
 					// String(response.getContent()));
 					SocialUser su = Util.toFaceBookSocialUser(new String(
 							response.getContent()));
+					
 					//resp.getWriter().write(su.toString());
 					RequestDispatcher rd = req
 							.getRequestDispatcher("/bq/open/social-media-login");

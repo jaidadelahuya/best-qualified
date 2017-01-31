@@ -29,6 +29,10 @@
 <link rel="stylesheet" href="/styles/animate.css">
 
 <style type="text/css">
+h4 {
+	color: #983b59
+}
+
 .subnav li {
 	list-style: none;
 	display: inline;
@@ -62,7 +66,8 @@
 					<div class="col-sm-12 no-padding-div" style="padding: 0px">
 						<div class="col-sm-8" style="border-right: 1px solid #eaeaea">
 
-							<img src="/images/unknown-user.jpg"
+							<img
+								<c:choose><c:when test="${empty user.pictureUrl}">src="/images/unknown-user.jpg"</c:when><c:otherwise>src="${user.pictureUrl}"</c:otherwise></c:choose>
 								class="img img-responsive img-circle"
 								/ style="width: 6em; float: left; margin: 1%; margin-right: 4%;">
 							<div style="padding: 1%;">
@@ -148,16 +153,17 @@
 				</div>
 			</div>
 
-			<div class="row" style="margin-bottom: 2%;">
+			<div class="row" style="margin-bottom: 1%;">
 				<div class="col-sm-12 card-panel"
-					style="padding: 2px; color: white; background-color: gray">
+					style="padding: 2px; color: white; background-color: #a24e69">
 					<div class="col-sm-6">
-						<h4 style="cursor: pointer;" id="article-trig">
+						<h4 style="cursor: pointer; color: white" id="article-trig">
 							<i class="fa fa-newspaper-o" aria-hidden="true"
-								style="padding-right: 1%;"></i> Write an article</h4>
+								style="padding-right: 1%;"></i> Write an article
+						</h4>
 					</div>
 					<div class="col-sm-6">
-						<h4 style="cursor: pointer;" id="discussion-trig">
+						<h4 style="cursor: pointer; color: white;" id="discussion-trig">
 							<i class="fa fa-comments-o" aria-hidden="true"
 								style="padding-right: 1%;"></i> Start a discussion
 						</h4>
@@ -181,11 +187,11 @@
 					</div>
 					<div class="col-sm-10 card-panel">
 						<div class="col-sm-3 no-padding-div">
-							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><img
+							<a href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><img
 								class="" src="${item.pictureUrl}" width="130" height="130"></a>
 						</div>
 						<div class="col-sm-9" style="padding: 2%;">
-							<a href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><h3
+							<a href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'><h3
 									class="media-heading" id="lol">${item.title}</h3></a>
 							<p class="text-muted">
 								<span><i class="fa fa-user"></i> BEST-QUALIFIED</span> <span><i
@@ -194,20 +200,10 @@
 							</p>
 							<p>
 								${item.snippet}<span><a
-									href='<c:url value="bq/network/get-post?id=${item.webkey}" />'><i
-										class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+									href='<c:url value="/bq/community/article/single?webkey=${item.webkey}" />'>  <i>Read More</i></a></span>
 							</p>
 
-							<p id="socialo">
-								<span id="fb"> <a href=""><i
-										class="fa fa-facebook-square" aria-hidden="true"
-										style="color: #3b5998;"></i> Share</a></span> <span id="tw"><a
-									href=""><i class="fa fa-twitter-square" aria-hidden="true"
-										style="color: #00aced;"></i> Tweet</a></span> <span id="go"><a
-									href=""><i class="fa fa-google-plus-square"
-										aria-hidden="true" style="color: #F43222;"></i> Share</a></span>
-
-							</p>
+							
 						</div>
 					</div>
 				</div>
@@ -355,7 +351,7 @@
 
 	</div>
 
-	
+
 	<%@ include file="/WEB-INF/pages/footer.html"%>
 	<script src="/js/jquery-1.11.2.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -381,7 +377,7 @@
 				$("#applied-jobs-div").slideToggle();
 
 			});
-			
+
 		});
 	</script>
 

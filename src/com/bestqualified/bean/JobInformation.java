@@ -1,6 +1,7 @@
 package com.bestqualified.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.bestqualified.util.Util;
@@ -12,11 +13,25 @@ public class JobInformation implements Serializable {
 	 */
 	private static final long serialVersionUID = -960578853660814642L;
 
-	private String jobTitle, companyName, datePosted, jobDesc, extraInfo, experience,
-			pictureUrl, companyDesc, careerLevel, location, industry, jobType, pageUrl,
-			qualification, deadline, companyWebsite, applicationWebsite, applicationUrl, webKey, salaryRange;
+	private String jobTitle, companyName, datePosted, jobDesc,  experience,
+			pictureUrl, companyDesc, careerLevel, location,jobType, pageUrl,
+			qualification, deadline, companyWebsite, applicationWebsite, applicationUrl, webKey, salaryRange, jobRole;
+	private Date closeDate;
 	private boolean saved;
 	
+	
+	public String getJobRole() {
+		return jobRole;
+	}
+	public void setJobRole(String jobRole) {
+		this.jobRole = jobRole;
+	}
+	public Date getCloseDate() {
+		return closeDate;
+	}
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}
 	public boolean isSaved() {
 		return saved;
 	}
@@ -74,12 +89,7 @@ public class JobInformation implements Serializable {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public String getExtraInfo() {
-		return extraInfo;
-	}
-	public void setExtraInfo(String extraInfo) {
-		this.extraInfo = extraInfo;
-	}
+	
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
@@ -104,12 +114,7 @@ public class JobInformation implements Serializable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getIndustry() {
-		return industry;
-	}
-	public void setIndustry(String industry) {
-		this.industry = Util.getJobCategoryValue(industry);
-	}
+	
 	public String getJobType() {
 		return jobType;
 	}
@@ -120,7 +125,7 @@ public class JobInformation implements Serializable {
 		return qualification;
 	}
 	public void setQualification(String qualification) {
-		this.qualification = qualification;
+		this.qualification = Util.getEducationLevelValue(qualification);
 	}
 	public String getDeadline() {
 		return deadline;

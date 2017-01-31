@@ -61,12 +61,14 @@
 
 /* Standard syntax */
 @keyframes example1 {
+
     0%   {left:0px;}
     25%  {left:60%;}
     50%  {left:60%;}
     75%  {left:0px;}
     100% {left:0px;}
 }
+
 
 #animation-div {
 	color: white;
@@ -94,6 +96,7 @@
     75%  {background-color:#4A89DC;}
     100% {background-color:#DA4453;}
 }
+
 
 
 </style>
@@ -707,90 +710,39 @@
 									<label>Job Location </label> <select class="form-control " id="ja-job-region"
 										name="job-region">
 										<option></option>
-										<option>Abia</option>
-										<option>Abuja</option>
-										<option>Adamawa</option>
-										<option>Anambra</option>
-										<option>Akwa Ibom</option>
-										<option>Bauchi</option>
-										<option>Bayelsa</option>
-										<option>Benue</option>
-										<option>Borno</option>
-										<option>Cross River</option>
-										<option>Delta</option>
-										<option>Ebonyi</option>
-										<option>Enugu</option>
-										<option>Edo</option>
-										<option>Ekiti</option>
-										<option>Gombe</option>
-										<option>Imo</option>
-										<option>Jigawa</option>
-										<option>Kaduna</option>
-										<option>Kano</option>
-										<option>Katsina</option>
-										<option>Kebbi</option>
-										<option>Kogi</option>
-										<option>Kwara</option>
-										<option>Lagos</option>
-										<option>Nasarawa</option>
-										<option>Niger</option>
-										<option>Ogun</option>
-										<option>Ondo</option>
-										<option>Osun</option>
-										<option>Oyo</option>
-										<option>Plateau</option>
-										<option>Rivers</option>
-										<option>Sokoto</option>
-										<option>Taraba</option>
-										<option>Yobe</option>
-										<option>Zamfara</option>
+										<%@ include file="/partial/states.html" %>
 									</select>
 								</div>
 								<div class="col-sm-6 form-group ">
 									<label>Career Level </label> <select class="form-control" id="ja-career-level"
 										name="career-level">
 										<option></option>
-										<option value="101">Student (Undergraduate/Graduate)</option>
-										<option value="102">Entry Level</option>
-										<option value="103">Experienced (Non-Managerial)</option>
-										<option value="104">Manager (Manager/Supervisor of
-											Staff)</option>
-										<option value="105">Executive (SVP,VP,Department Head
-											etc)</option>
-										<option value="106">Senoir Executive (President, CFO.
-											etc)</option>
+										<%@ include file="/partial/career-level.html" %>
 									</select>
 								</div>
 								<div class="col-sm-6 form-group ">
 									<label>Salary Range </label> <select class="form-control" id="ja-salary"
 										name="salary">
 										<option></option>
-										<option value="201">10,000 - 50,000</option>
-										<option value="202">50,000 - 100,000</option>
-										<option value="203">100,000 - 300,000</option>
-										<option value="204">300,000 - 500,000</option>
-										<option value="205">Unspecified</option>
+										<%@ include file="/partial/salary-range.html" %>
 									</select>
 								</div>
 								<div class="col-sm-6 form-group">
 									<label>Job Type </label> <select class="form-control" id="ja-job-type"
 										name="job-type">
 										<option></option>
-										<option value="301">Freelance</option>
-										<option value="302">Full Time</option>
-										<option value="303">Internship</option>
-										<option value="304">Part Time</option>
-										<option value="305">Permanent</option>
-										<option value="306">Temporary</option>
+										<%@ include file="/partial/job-type.html" %>
 									</select>
 								</div>
 								<div class="col-sm-12 form-group">
 									<label>Email: </label> <input class="form-control" id="ja-email"
+
 										placeholder="EMail">
 								</div>
 								<div class="col-sm-12 form-group" style="text-align: center">
 
 									<input id="job-alert-sign-up" type="button" class="btn btn-lg btn-warning" value="Sign Up Now">
+
 								</div>
 							</div>
 
@@ -857,6 +809,7 @@
 				.ready(
 						function() {
 							$("#job-alert-sign-up").click(function() {
+<<<<<<< Updated upstream
 								var email = $("#ja-email").val();
 								if(email == "") {
 									console.log("no way");
@@ -892,6 +845,8 @@
 									});
 								}
 								
+=======
+>>>>>>> Stashed changes
 								
 							});
 							$("#get-rated").click(function() {
