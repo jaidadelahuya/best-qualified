@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="gson-2.1.jar"/>
 	<classpathentry kind="lib" path="org-apache-commons-codec.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-java-sdk-1.9.38"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
